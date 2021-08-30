@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>SoC实验工具中文指南</title>
+    <url>/myweb/2021/08/30/Guide-of-SoC-class/</url>
+    <content><![CDATA[<h1 id="SOC实验工具中文指南"><a href="#SOC实验工具中文指南" class="headerlink" title="SOC实验工具中文指南"></a>SOC实验工具中文指南</h1><p>仅涉及课堂上老师要求完成的操作以及<strong>大作业</strong>内容<br>具体内容还得自己耐心阅读三本指南</p>
+<h2 id="Design-Compile-设计工具"><a href="#Design-Compile-设计工具" class="headerlink" title="Design Compile 设计工具"></a>Design Compile 设计工具</h2><h3 id="Task-1-环境配置"><a href="#Task-1-环境配置" class="headerlink" title="Task 1 环境配置"></a>Task 1 环境配置</h3><ul>
+<li><p>下载VMwareTool 15版本以上</p>
+</li>
+<li><p>解压所下载的压缩包，用VM打开虚拟机</p>
+</li>
+<li><p>Unix终端基本指令：桌面右击 “open in terminal”</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//输入$之后的指令</span><br><span class="line">$ cd &lt;file name&gt;			//进入文件夹目录</span><br><span class="line">$ cd ..					//返回上级目录</span><br><span class="line">$ ls						//列出本目录下级目录</span><br><span class="line">$ ls -al					//列出本目录下所有内容</span><br><span class="line">$ gedit &lt;file name&gt;		//文本编辑器打开文件，若&lt;file name&gt;不存在则新建 </span><br></pre></td></tr></table></figure></li>
+<li><p>配置软件环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1		//进入lab1目录</span><br><span class="line">$ gedit common_setup.tcl							//文本编辑器编辑</span><br><span class="line"></span><br><span class="line">//按照技术文档表格编辑相关变量路径</span><br></pre></td></tr></table></figure></li>
+<li><p>检查环境变量是否正确</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1		//进入lab1目录</span><br><span class="line">$ design_vision -topo								//启动软件图形化界面（GUI）</span><br><span class="line"></span><br><span class="line">//GUI顶部工具栏：File -&gt;  setup</span><br><span class="line">//libirary路径为上一步修改的路径则环境变量配置正确</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Task-3-约束文件"><a href="#Task-3-约束文件" class="headerlink" title="Task 3 约束文件"></a>Task 3 约束文件</h3><ul>
+<li><p>新建约束文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab3/scripts</span><br><span class="line">$ gedit MY_DESIGN.con										//新建约束文件</span><br><span class="line"></span><br><span class="line">//自己想办法把约束文件写了</span><br><span class="line">//不过我猜你写不来</span><br><span class="line">//那下面就直接带你抄答案</span><br><span class="line"></span><br><span class="line">$ cd ..					//返回上级lab3目录</span><br><span class="line">$ ls -al				//展开下级全部目录</span><br><span class="line">$ cd .solution			//进入到.solution目录</span><br><span class="line">$ gedit MY_DESIGN.con	//文本编辑器打开已有的约束文件</span><br></pre></td></tr></table></figure></li>
+<li><p>应用约束文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab3</span><br><span class="line">$ design_vision -topo		//进入DC GUI界面</span><br></pre></td></tr></table></figure>
+
+<p>打开设计文件 <code>rtl/MY_DESIGN.v</code><br>link(关联) library<br>检查    <code>-&gt; check_library</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//应用约束文件</span><br><span class="line">//输入 -&gt; 后的命令</span><br><span class="line">-&gt; source scripts/MY_DESIGN.con</span><br><span class="line">-&gt; check_timing</span><br><span class="line">-&gt; report_clock</span><br><span class="line">-&gt; report_clock -skew</span><br><span class="line">-&gt; report_port -verbose</span><br><span class="line"></span><br><span class="line">-&gt; write_script -out scripts/MY_DESIGN.wscr</span><br><span class="line">-&gt; write -format ddc -hier -out unmapped/MY_DESIGN.ddc</span><br><span class="line">-&gt; exit</span><br><span class="line"></span><br><span class="line">//对比两个约束文件</span><br><span class="line">$ diff scripts/MY_DESIGN.wscr .solutions/MY_DESIGN.wscr</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="IC-Compiler-版图工具"><a href="#IC-Compiler-版图工具" class="headerlink" title="IC Compiler 版图工具"></a>IC Compiler 版图工具</h2><h3 id="Task-1-启动"><a href="#Task-1-启动" class="headerlink" title="Task 1 启动"></a>Task 1 启动</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_labs/ICC_2013.12-sp2</span><br><span class="line">$ tar -xvf ces_icc_2013.12-sp2.tar.gz		//解压ICC文件</span><br><span class="line"></span><br><span class="line">$ cd digital_labs/ICC_2013.12-sp2/IC_Compiler_2013.12-SP2/ORCA_TOP/rm_icc/tmp</span><br><span class="line">$ make restore_lab0</span><br><span class="line">$ make load									//启动版图工具</span><br><span class="line"></span><br><span class="line">-&gt; start_gui								//启动图形化界面</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="大作业"><a href="#大作业" class="headerlink" title="大作业"></a>大作业</h2><h3 id="实验一-序列检测电路"><a href="#实验一-序列检测电路" class="headerlink" title="实验一 序列检测电路"></a>实验一 序列检测电路</h3><h4 id="RTL设计"><a href="#RTL设计" class="headerlink" title="RTL设计"></a>RTL设计</h4><p>序列检测电路大多采用状态机实现，网上有大量代码可以复制<br>此处采用移位寄存器实现，较为简易（懒得自己写的可以变更变量名套用）</p>
+<ul>
+<li>设计文件project1.v</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">//序列检测电路——10100</span></span><br><span class="line"><span class="comment">//采用移位寄存器设计,序列匹配则输出1，否则为0</span></span><br><span class="line"><span class="comment">//By SevenTao </span></span><br><span class="line"><span class="comment">//2021.7.1</span></span><br><span class="line"><span class="keyword">module</span> project1 (</span><br><span class="line">    <span class="keyword">input</span>       clk,                                    <span class="comment">//外部时钟</span></span><br><span class="line">    <span class="keyword">input</span>       rst,                                    <span class="comment">//外部复位，高电平有效</span></span><br><span class="line">    <span class="keyword">input</span>       data,                                   <span class="comment">//输入数据位</span></span><br><span class="line">    <span class="keyword">output</span>      res                                     <span class="comment">//输出检测结果</span></span><br><span class="line">);</span><br><span class="line">    <span class="keyword">reg</span>[<span class="number">4</span>:<span class="number">0</span>]    data_r;        <span class="comment">//5位存储输入数据流的寄存器</span></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(!rst)    data_r &lt;= &#123;data_r[<span class="number">3</span>:<span class="number">0</span>],data&#125;;       <span class="comment">//进行移位</span></span><br><span class="line">        <span class="keyword">else</span>        data_r &lt;= <span class="number">5&#x27;b00000</span>;                 <span class="comment">//复位清零</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assign</span> res = (data_r == <span class="number">5&#x27;b10100</span>) ? <span class="number">1&#x27;b1</span> : <span class="number">1&#x27;b0</span>;    <span class="comment">//序列检测逻辑</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>仿真文件project1_tb.v</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">//序列检测电路仿真文件</span></span><br><span class="line"><span class="comment">//By SevenTao </span></span><br><span class="line"><span class="comment">//2021.7.1</span></span><br><span class="line"><span class="meta">`<span class="meta-keyword">timescale</span> 1ns/1ns</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> project1_tb;</span><br><span class="line">    <span class="keyword">reg</span>         clk;</span><br><span class="line">    <span class="keyword">reg</span>         rst;</span><br><span class="line">    <span class="keyword">reg</span>         data;</span><br><span class="line">    <span class="keyword">wire</span>        res;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//时钟、复位信号初始化</span></span><br><span class="line">    <span class="comment">//产生检测序列</span></span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        clk = <span class="number">0</span>;</span><br><span class="line">        rst = <span class="number">1</span>;</span><br><span class="line">        #<span class="number">5</span> rst=<span class="number">0</span>;</span><br><span class="line">        data = <span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">$stop</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//产生时钟信号</span></span><br><span class="line">    <span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//例化</span></span><br><span class="line">    project1 project1(</span><br><span class="line">        <span class="variable">.clk</span>(clk),</span><br><span class="line">        <span class="variable">.rst</span>(rst),</span><br><span class="line">        <span class="variable">.data</span>(data),</span><br><span class="line">        <span class="variable">.res</span>(res)</span><br><span class="line">    );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="仿真"><a href="#仿真" class="headerlink" title="仿真"></a>仿真</h4><p>Synopsys下VCS进行仿真时出现环境报错<br>用半天时间尝试修改环境变量之后依然出现了其他报错<br>因此推荐下载modelsim进行仿真<br>若非要用VCS，通过<a href="https://pan.baidu.com/s/1-Dus8rN-fBCSwSVNAY4sKQ">此链接</a>下载新虚拟机使用（提取码：m4x4）</p>
+<h4 id="DC综合"><a href="#DC综合" class="headerlink" title="DC综合"></a>DC综合</h4><ul>
+<li>约束文件project1.con（#后为注释内容，注意结合自己的RTL设计文件更换变量）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#By SevenTao</span><br><span class="line">#2021.7.1</span><br><span class="line"></span><br><span class="line">#复位</span><br><span class="line">reset_design</span><br><span class="line"></span><br><span class="line">#时钟频率1Mhz对应1000ns</span><br><span class="line">#clk为RTL文件里的时钟端口变量名</span><br><span class="line">create_clock -period 1000 [get_ports clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的source latency为20ns</span><br><span class="line">set_clock_latency -source 20 [get_clocks clk] </span><br><span class="line"></span><br><span class="line">#时钟信号的network latency为20ns</span><br><span class="line">set_clock_latency 10 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的setup_uncertainty为学号后两位，我是69</span><br><span class="line">set_clock_uncertainty -setup 69 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的transition为5ns</span><br><span class="line">set_clock_transition 5 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#除clk之外输入信号最大延时为5ns</span><br><span class="line">#RTL设计文件中端口输入变量为data</span><br><span class="line">set_input_delay -max  5 -clock clk [get_ports data]</span><br><span class="line"></span><br><span class="line">#除clk之外输入信号使用bufbd1驱动</span><br><span class="line">set_driving_cell -lib_cell bufbd1 \</span><br><span class="line"> [remove_from_collection [all_inputs] [get_ports &quot;clk&quot;]]</span><br><span class="line"></span><br><span class="line">#输出信号延时为5ns</span><br><span class="line">set_output_delay 0.5 -clock clk [get_ports res]</span><br><span class="line"></span><br><span class="line">#输出信号连接负载电容1fF，即0.001pf</span><br><span class="line">set_load 0.001 [get_ports Cout*]</span><br><span class="line"></span><br><span class="line">#设置版图利用率为0.9</span><br><span class="line">set_utilization 0.9</span><br><span class="line"></span><br><span class="line">#设置版图的宽长比为1</span><br><span class="line">set_aspect_ratio 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>脚本文件dc.tcl</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//需要先在DC中手动读入脚本文件</span><br><span class="line">//然后再shell中运行本脚本文件</span><br><span class="line"></span><br><span class="line">//关联library，检查设计</span><br><span class="line">link</span><br><span class="line">check_design</span><br><span class="line"></span><br><span class="line">//应用约束文件</span><br><span class="line">source project1.con</span><br><span class="line">check_timing</span><br><span class="line"></span><br><span class="line">//report信息写至.rpt文件中</span><br><span class="line">redirect -tee -file rc.rpt &#123;report_constraint -all&#125;</span><br><span class="line">redirect -tee -file rt.rpt &#123;report_timing&#125;</span><br><span class="line">redirect -tee -file ra.rpt &#123;report_area&#125;</span><br><span class="line"></span><br><span class="line">//综合结果写入.ddc文件中</span><br><span class="line">write -f ddc -hier -out project1.ddc</span><br><span class="line"></span><br><span class="line">exit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DC综合</li>
+</ul>
+<p>综合时发现若直接在题目要求的目录（即SoCxxx）启动DC的话，会出现library的报错，即第一节课出现的同款错误，问题在于第一次课的环境配置仅应用于 lab1 下的.tcl，并没有配置到全局，因此推荐讲文件复制到 <strong>lab1 <strong>目录下的rtl与scripts文件夹下，此时在lab1目录下启动DC，具体操作类同于</strong>DC TASK1</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1</span><br><span class="line">$ design_vision -topo</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我在脚本里没有写读取verilog文件的操作，因此需要先手动读入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-&gt; read_verilog rtl/project1.v</span><br><span class="line">-&gt; source scripts/dc.tcl</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>读入之后可以运行脚本，但是整个脚本直接运行容易出错，依然推荐手动逐行输入命令，检查每条命令是否出错。产生的文件在目录下可以直接看到并用gedit打开。</p>
+<h3 id="实验二-I2C控制器版图设计"><a href="#实验二-I2C控制器版图设计" class="headerlink" title="实验二 I2C控制器版图设计"></a>实验二 I2C控制器版图设计</h3><p>需要现在虚拟机中设置共享文件夹<br>Unix下共享文件夹在mnt/hgfs下（双击computer进入filesystem）<br>右击解压压缩包（Extract here）<br>复制其中的rtl源码到自己的rtl文件夹下</p>
+<ul>
+<li>约束文件 i2c.con</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#By SevenTao</span><br><span class="line">#2021.7.1</span><br><span class="line"></span><br><span class="line">#复位</span><br><span class="line">reset_design</span><br><span class="line"></span><br><span class="line">#wb_clk_i = 32MHz</span><br><span class="line">create_clock -period 31 [get_ports wb_clk_i]</span><br><span class="line"></span><br><span class="line">#别的我实在找不到啥约束好写的了</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>脚本文件 i2c.tcl</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">link</span><br><span class="line">check_design</span><br><span class="line"></span><br><span class="line">source scripts/i2c.con</span><br><span class="line">check_timing</span><br><span class="line"></span><br><span class="line">write -f ddc -hier -out project1.ddc</span><br><span class="line"></span><br><span class="line">exit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DC综合</li>
+</ul>
+<p>同样推荐先将文件复制到lab1进行操作，操作和实验1相同</p>
+<ul>
+<li>icc.tcl</li>
+</ul>
+<p><code>~/digital_work/soc2020/scripts/icc.tcl</code><br>自己写一时半会是肯定写不出来的，就直接改改用吧</p>
+<ul>
+<li>版图</li>
+</ul>
+<p>floorplan,place,cts,route,finish都对应Guide的不同Task<br>但是如何用综合出来的ddc文件设计出版图我也不会，放弃了，裂开</p>
+]]></content>
+      <categories>
+        <category>NPUclasses</category>
+      </categories>
+      <tags>
+        <tag>synopsys</tag>
+        <tag>SoC</tag>
+        <tag>Verilog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建站过程</title>
+    <url>/myweb/2021/08/27/record/</url>
+    <content><![CDATA[<h1 id="博客建站过程记录"><a href="#博客建站过程记录" class="headerlink" title="博客建站过程记录"></a>博客建站过程记录</h1><p>托管：github<br>框架：hexo<br>域名：暂无</p>
+<h3 id="一、Github建立仓库"><a href="#一、Github建立仓库" class="headerlink" title="一、Github建立仓库"></a>一、Github建立仓库</h3><ul>
+<li>Github新建空仓库：<br><a href="https://github.com/TSAW2000/myweb">TSAW2000/myweb (github.com)</a></li>
+</ul>
+<h3 id="二、Hexo配置"><a href="#二、Hexo配置" class="headerlink" title="二、Hexo配置"></a>二、Hexo配置</h3><ul>
+<li><p>文件夹路径：<code>F:/Seven/BlogWeb</code><br>//Seven为个人文件夹，blogweb为个人网站文件夹</p>
+</li>
+<li><p>路径下克隆空仓库：<code>git clone https://github.com/TSAW2000/myweb.git</code></p>
+</li>
+<li><p>新建文件夹<br>seventao:    博客框架主体文件夹<br>rec:               建站过程记录<br>src:               博客资源文件夹</p>
+</li>
+<li><p>文件夹路径： <code>F:/Seven/BlogWeb/seventao/seventao</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//git bash</span><br><span class="line">hexo init					///初始化框架</span><br><span class="line">npm install					//下载框架文件</span><br><span class="line">npm i hexo-renderer-swig	//没有这个会踩换主题后本地预览乱码的坑</span><br><span class="line">npm install hexo-deployer-git --save	//安装git部署插件</span><br><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next	//下载主题</span><br></pre></td></tr></table></figure></li>
+<li><p>记事本编辑_config.yml</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: ICant</span><br><span class="line">subtitle: IC ant. I can&#x27;t</span><br><span class="line">description: 学不会微电子，转行计算机</span><br><span class="line">keywords:</span><br><span class="line">author: NWPU_tao</span><br><span class="line">language: zh-Hans</span><br><span class="line">timezone: &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">//设置github部署</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:tsaw2000/myweb.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  </span><br><span class="line"># URL</span><br><span class="line">url: https://tsaw2000.github.io/myweb/</span><br><span class="line">root: /myweb.github.io</span><br><span class="line"></span><br><span class="line">theme: next		//设置主题</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="三、部署至github"><a href="#三、部署至github" class="headerlink" title="三、部署至github"></a>三、部署至github</h3><ul>
+<li><p>文件夹路径： <code>F:/Seven/BlogWeb/seventao/seventao</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g			//hexo generate 生成静态网站</span><br><span class="line">hexo s -p 80	//‘http://localhost:80’本地预览</span><br><span class="line">hexo d			//上传至github</span><br></pre></td></tr></table></figure></li>
+<li><p>Github仓库下：<code>settings -&gt; Pages -&gt; Branch:master /(root) -&gt; Save</code></p>
+</li>
+<li><p><a href="https://tsaw2000.github.io/myweb/">https://tsaw2000.github.io/myweb/</a>进行访问</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>ForFun</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《胡说IC》随记</title>
+    <url>/myweb/2021/08/30/Jobs-of-IC/</url>
+    <content><![CDATA[<h1 id="《胡说IC-菜鸟工程师进阶》随记"><a href="#《胡说IC-菜鸟工程师进阶》随记" class="headerlink" title="《胡说IC-菜鸟工程师进阶》随记"></a>《胡说IC-菜鸟工程师进阶》随记</h1><h2 id="岗位分析"><a href="#岗位分析" class="headerlink" title="岗位分析"></a>岗位分析</h2><h3 id="集成电路算法工程师"><a href="#集成电路算法工程师" class="headerlink" title="集成电路算法工程师"></a>集成电路算法工程师</h3><h4 id="岗位内容"><a href="#岗位内容" class="headerlink" title="岗位内容"></a>岗位内容</h4><ul>
+<li><strong>协议学习</strong><br>掌握多种通信协议，根据协议完成收发端口的设计。</li>
+<li><strong>文献调研</strong><br>选择合适的文献，结合自身系统特地有借鉴得创新。</li>
+<li><strong>系统框架与接口</strong><br>团队开发前确定系统的整体框架与各个模块之间的接口。</li>
+<li><strong>算法仿真</strong><br>仿真包括激励的制造，系统的建模，响应的分析。往往基于matlab、C、        systemC等工具。</li>
+<li><strong>RTL实现</strong><br>利用硬件描述语言实现，与先前的仿真进行对比。</li>
+<li><strong>FPGA验证</strong><br>将RTL工程综合后在FPGA上进行验证。</li>
+</ul>
+<h4 id="岗位要求"><a href="#岗位要求" class="headerlink" title="岗位要求"></a>岗位要求</h4><ul>
+<li><strong>基础知识与技能</strong><ul>
+<li>信号处理、通信原理等基础知识。</li>
+<li>文献调研与创新能力。</li>
+<li>基于matlab和C的仿真能力。</li>
+<li>FPGA平台调试能力，包括示波器、逻辑分析仪、信号发生器等。</li>
+<li>技术文档书写能力。</li>
+</ul>
+</li>
+<li><strong>软实力</strong><ul>
+<li>数学基础好，对软硬件，数模电都有了解。</li>
+<li>对相对枯燥的算法开发拥有兴趣和热情。</li>
+<li>善于和其他工程师沟通，能集思广益，多方请教。</li>
+</ul>
+</li>
+</ul>
+<h4 id="学习参考"><a href="#学习参考" class="headerlink" title="学习参考"></a>学习参考</h4><ul>
+<li>IEEE期刊</li>
+<li>《离散时间信号处理（第二版）》奥本海姆著</li>
+<li>《数字通信（第四版）》普罗科斯著 </li>
+</ul>
+<h3 id="数字前端工程师"><a href="#数字前端工程师" class="headerlink" title="数字前端工程师"></a>数字前端工程师</h3><h4 id="岗位内容-1"><a href="#岗位内容-1" class="headerlink" title="岗位内容"></a>岗位内容</h4><p>针对IC的数字部分进行前端设计，可能是整个数字IC也可能是混合信号IC的数字部分。</p>
+<h4 id="岗位要求-1"><a href="#岗位要求-1" class="headerlink" title="岗位要求"></a>岗位要求</h4><ul>
+<li><strong>基本知识与技能</strong><ul>
+<li>数字集成电路设计基础知识，涵盖了半导体物理、晶体管级设计、集成电路处理、逻辑级设计、系统级设计、测试等方面知识。</li>
+<li>掌握如Verilog等硬件描述语言</li>
+<li>掌握例如Shell、Perl或Python等脚本语言。</li>
+<li>掌握如SystemVerilog和C++等验证语言。</li>
+<li>掌握基于例如arm、RISC-V、MIPS等微处理器相关知识，熟悉如            AWBA、AXI等总线知识。</li>
+<li>熟悉数模混合设计，拥有模拟电路和数模混合的相关基础。</li>
+<li>熟悉门级电路和后端，编写RTL代码时需要充分考虑到可综合性和物理实现行，权衡好物理实现中的面积与性能。</li>
+<li>掌握UNIX下主流软件EDA工具的使用。</li>
+</ul>
+</li>
+<li><strong>软实力</strong><ul>
+<li>优秀的代码风格，体现在其规范性和一致性。</li>
+<li>对芯片上下游模块的大格局了解与建议能力。</li>
+</ul>
+</li>
+</ul>
+<h4 id="学习参考-1"><a href="#学习参考-1" class="headerlink" title="学习参考"></a>学习参考</h4><ul>
+<li><a href="http://www.eetop.com/">www.eetop.com</a></li>
+<li>《Digital Integrated Circuit Design》数字集成电路设计</li>
+<li>《Digital Design Principles and Practices》数字设计——原理与实践</li>
+<li>《Advanced Digital Design with the Verilog HDL》Verilog HDL高级数字设计</li>
+<li>Clifford.E.Cumming论文集</li>
+<li>《Perl语言入门》</li>
+<li>《C++ Primer》</li>
+</ul>
+<h3 id="芯片验证工程师"><a href="#芯片验证工程师" class="headerlink" title="芯片验证工程师"></a>芯片验证工程师</h3><h4 id="岗位内容-2"><a href="#岗位内容-2" class="headerlink" title="岗位内容"></a>岗位内容</h4><p>验证所设计的逻辑代码是否符合预期的要求以及所定义的规范<br>    - 随记验证<br>    通过大量随记向量来验证测试，通常是将硬件与软件结果进行比较，或者通    过断言比较<br>    - 形似验证<br>    分为等价性检查、模型检查和定理证明<br>验证工具包括了OVM、VMM和UVM，其验证语言为SystemVerilog</p>
+<h4 id="岗位要求-2"><a href="#岗位要求-2" class="headerlink" title="岗位要求"></a>岗位要求</h4><ul>
+<li><strong>EDA Tools的使用</strong><ul>
+<li>Cadence<ul>
+<li>NC-verilog, NC-sim, Specman Simvision : 仿真工具</li>
+<li>Vmanager : 验证工具组，包括收集分析Coverage</li>
+</ul>
+</li>
+<li>Synopsys<ul>
+<li>DVE/VCS : 仿真工具</li>
+<li>URG : Coverage</li>
+</ul>
+</li>
+<li>Mentor<ul>
+<li>ModelSim/Questa : 仿真工具</li>
+<li>Verdi/Debussy : 看波形Debug工具</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>脚本编写能力</strong><ul>
+<li>Perl：批量处理数据</li>
+<li>GNU MAKE：编写有前后依赖关系的任务脚本</li>
+<li>Linux Bash Script：编写Linux环境脚本</li>
+<li>Vim/Gvim/emacs：文本编辑器</li>
+</ul>
+</li>
+<li><strong>掌握验证语言与方法论</strong><ul>
+<li>Vera</li>
+<li>Specman Elite</li>
+<li>C++/System C</li>
+<li>Syetem Verilog</li>
+<li>OVM</li>
+<li>VMM</li>
+<li>UVM</li>
+</ul>
+</li>
+<li><strong>掌握常见协议</strong><ul>
+<li>AMBA(APB/AHB/AXI)</li>
+<li>USB</li>
+<li>PCIe/Pci/Pci-X</li>
+<li>TCP-IP</li>
+<li>802.xx.xx</li>
+<li>SRIO</li>
+<li>SATA</li>
+<li>DDR</li>
+</ul>
+</li>
+</ul>
+<h4 id="学习参考-2"><a href="#学习参考-2" class="headerlink" title="学习参考"></a>学习参考</h4><ul>
+<li>《Writing Testbench 基础》</li>
+<li>《verification Methodology Manual for SyetemVerilog》</li>
+<li>《OVM open verification methodology cook-book》</li>
+</ul>
+<h3 id="数字后端工程师"><a href="#数字后端工程师" class="headerlink" title="数字后端工程师"></a>数字后端工程师</h3><h4 id="岗位内容-3"><a href="#岗位内容-3" class="headerlink" title="岗位内容"></a>岗位内容</h4><p>将门级网表转换为标准的GDS文件，称为设计实现或者物理设计<br>其工作流程如下：<br>    - 布局规划（Floorplan）<br>    - 标准单元的摆放（Placement）<br>    - 时钟数综合（CTS）<br>    - 布线（Routing）<br>    - 寄生参数提取（RC Extraction）<br>    - 噪声即串扰分析（SI Analysis）<br>    - 时序分析（Timing Analysis）<br>    - 优化时序（Timing Optimization）<br>    - IR-drop/EM/Power分析<br>    - DRC/LVS/Antenna检查<br>    - Filler Cell Insertion</p>
+<h4 id="岗位要求-3"><a href="#岗位要求-3" class="headerlink" title="岗位要求"></a>岗位要求</h4><ul>
+<li><strong>数字设计及工艺知识</strong><br>包括基本数字电路知识，半导体工艺知识</li>
+<li><strong>脚本编写能力</strong><br>tcl、shell、perl .etc</li>
+<li><strong>EDA工具的熟练使用</strong><br>SoC Enconter , ETS , QRC , EPS , ICC , Star-RC , PrimeTime , Olympus .etc</li>
+<li><strong>掌握对时序的分析优化</strong></li>
+<li><strong>了解模拟电路以及混合信号IC layout</strong></li>
+</ul>
+<h4 id="学习参考-3"><a href="#学习参考-3" class="headerlink" title="学习参考"></a>学习参考</h4><ul>
+<li>《Digital Integrated Circuits:A Design Perspective》</li>
+<li>《Nano CMOS Circuit and Physical Design》</li>
+<li>《数字集成电路物理设计》</li>
+<li>《shell脚本学习指南》</li>
+<li>《sed &amp; awk》</li>
+<li>《perl语言入门》/《perl语言编程》</li>
+</ul>
+<h3 id="模拟工程师"><a href="#模拟工程师" class="headerlink" title="模拟工程师"></a>模拟工程师</h3><h4 id="岗位内容-4"><a href="#岗位内容-4" class="headerlink" title="岗位内容"></a>岗位内容</h4><p>按技术类型可分为只处理模拟信号的线性IC和同时处理模拟与数字信号的混合IC<br>按应用可以分为标准型模拟IC和特殊应用型模拟IC<br>标准型模拟IC包括了放大器、电压调节参考对比、信号界面、数据转换和比较器</p>
+<h4 id="岗位要求-4"><a href="#岗位要求-4" class="headerlink" title="岗位要求"></a>岗位要求</h4><ul>
+<li>数字电路基础知识</li>
+<li>模拟与器件知识</li>
+<li>EDA Tools</li>
+<li>Layout<ul>
+<li>信号流向与布局</li>
+<li>匹配模拟版图的核心</li>
+<li>布线</li>
+<li>寄生</li>
+</ul>
+</li>
+<li>仿真与测试能力</li>
+</ul>
+<h4 id="学习参考-4"><a href="#学习参考-4" class="headerlink" title="学习参考"></a>学习参考</h4><ul>
+<li>《Analysis and Design of Analog Integrated Circuits, Gray Mayer et al》</li>
+<li>《Design Of Analog CMOS Integrated Circuit, Razavi》</li>
+<li>《CMOS Analog Circuit Design, Allen》</li>
+<li>《Analog Integrated Circuit Design, Johns&amp;Martin》</li>
+<li>《Analog Design Essencial, willy Sacnsen》</li>
+</ul>
+<h3 id="版图工程师"><a href="#版图工程师" class="headerlink" title="版图工程师"></a>版图工程师</h3><h4 id="岗位内容-5"><a href="#岗位内容-5" class="headerlink" title="岗位内容"></a>岗位内容</h4><p>分为模拟版图设计工程师和数字后端工程师，其中模拟以手工为主，数字则利用layout工具进行自动布局布线及后仿真。<br>将前端设计产生的门级网表，通过EDA设计工具进行布局布线和进行物理验证，并最终产生供制造用的GDSII数据的过程，主要工作职责有：<br>    - 芯片物理结构分析<br>    - 逻辑分析<br>    - 建立后端设计流程<br>    - 版图布局布线<br>    - 版图编辑<br>    - 版图物理验证<br>    - 联络代工厂并提交生产数据</p>
+<h4 id="岗位要求-5"><a href="#岗位要求-5" class="headerlink" title="岗位要求"></a>岗位要求</h4><ul>
+<li>半导体器件与物理相关知识</li>
+<li>集成电路设计能力</li>
+<li>一定的编程能力</li>
+</ul>
+<h4 id="学习参考-5"><a href="#学习参考-5" class="headerlink" title="学习参考"></a>学习参考</h4><ul>
+<li>《IC Mask Design》</li>
+<li>《The Art of Analog Layout》</li>
+<li>《CMOS Circuit Design,Layout,and Simulation》</li>
+<li>《Design of Analog CMOS Intergrate Circuits》</li>
+<li>EDA: Candence virtuoso laker</li>
+</ul>
+]]></content>
+      <categories>
+        <category>IC industry</category>
+      </categories>
+      <tags>
+        <tag>Jobs</tag>
+      </tags>
+  </entry>
+</search>

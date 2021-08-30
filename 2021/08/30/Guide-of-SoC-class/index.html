@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/myweb/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/myweb/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myweb/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myweb/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/myweb/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/myweb/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/myweb/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/myweb/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/myweb/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="synopsys,SoC,Verilog," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="西北工业大学微电子学院SoC实践课程的摸鱼指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SoC实验工具中文指南">
+<meta property="og:url" content="https://tsaw2000.github.io/myweb/2021/08/30/Guide-of-SoC-class/index.html">
+<meta property="og:site_name" content="ICant">
+<meta property="og:description" content="西北工业大学微电子学院SoC实践课程的摸鱼指南">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-08-30T15:04:54.000Z">
+<meta property="article:modified_time" content="2021-08-30T15:32:46.228Z">
+<meta property="article:author" content="桃妖">
+<meta property="article:tag" content="synopsys">
+<meta property="article:tag" content="SoC">
+<meta property="article:tag" content="Verilog">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tsaw2000.github.io/myweb/2021/08/30/Guide-of-SoC-class/"/>
+
+
+
+
+
+  <title>SoC实验工具中文指南 | ICant</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myweb/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ICant</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">IC ant. I can't <br>学不会微电子，转行计算机</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myweb/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/myweb/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/myweb/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myweb/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tsaw2000.github.io/myweb/myweb/2021/08/30/Guide-of-SoC-class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myweb/images/tao.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ICant">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SoC实验工具中文指南</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-30T23:04:54+08:00">
+                2021-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myweb/categories/NPUclasses/" itemprop="url" rel="index">
+                    <span itemprop="name">NPUclasses</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  西北工业大学微电子学院SoC实践课程的摸鱼指南
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="SOC实验工具中文指南"><a href="#SOC实验工具中文指南" class="headerlink" title="SOC实验工具中文指南"></a>SOC实验工具中文指南</h1><p>仅涉及课堂上老师要求完成的操作以及<strong>大作业</strong>内容<br>具体内容还得自己耐心阅读三本指南</p>
+<h2 id="Design-Compile-设计工具"><a href="#Design-Compile-设计工具" class="headerlink" title="Design Compile 设计工具"></a>Design Compile 设计工具</h2><h3 id="Task-1-环境配置"><a href="#Task-1-环境配置" class="headerlink" title="Task 1 环境配置"></a>Task 1 环境配置</h3><ul>
+<li><p>下载VMwareTool 15版本以上</p>
+</li>
+<li><p>解压所下载的压缩包，用VM打开虚拟机</p>
+</li>
+<li><p>Unix终端基本指令：桌面右击 “open in terminal”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//输入$之后的指令</span><br><span class="line">$ cd &lt;file name&gt;			//进入文件夹目录</span><br><span class="line">$ cd ..					//返回上级目录</span><br><span class="line">$ ls						//列出本目录下级目录</span><br><span class="line">$ ls -al					//列出本目录下所有内容</span><br><span class="line">$ gedit &lt;file name&gt;		//文本编辑器打开文件，若&lt;file name&gt;不存在则新建 </span><br></pre></td></tr></table></figure></li>
+<li><p>配置软件环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1		//进入lab1目录</span><br><span class="line">$ gedit common_setup.tcl							//文本编辑器编辑</span><br><span class="line"></span><br><span class="line">//按照技术文档表格编辑相关变量路径</span><br></pre></td></tr></table></figure></li>
+<li><p>检查环境变量是否正确</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1		//进入lab1目录</span><br><span class="line">$ design_vision -topo								//启动软件图形化界面（GUI）</span><br><span class="line"></span><br><span class="line">//GUI顶部工具栏：File -&gt;  setup</span><br><span class="line">//libirary路径为上一步修改的路径则环境变量配置正确</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Task-3-约束文件"><a href="#Task-3-约束文件" class="headerlink" title="Task 3 约束文件"></a>Task 3 约束文件</h3><ul>
+<li><p>新建约束文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab3/scripts</span><br><span class="line">$ gedit MY_DESIGN.con										//新建约束文件</span><br><span class="line"></span><br><span class="line">//自己想办法把约束文件写了</span><br><span class="line">//不过我猜你写不来</span><br><span class="line">//那下面就直接带你抄答案</span><br><span class="line"></span><br><span class="line">$ cd ..					//返回上级lab3目录</span><br><span class="line">$ ls -al				//展开下级全部目录</span><br><span class="line">$ cd .solution			//进入到.solution目录</span><br><span class="line">$ gedit MY_DESIGN.con	//文本编辑器打开已有的约束文件</span><br></pre></td></tr></table></figure></li>
+<li><p>应用约束文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab3</span><br><span class="line">$ design_vision -topo		//进入DC GUI界面</span><br></pre></td></tr></table></figure>
+
+<p>打开设计文件 <code>rtl/MY_DESIGN.v</code><br>link(关联) library<br>检查    <code>-&gt; check_library</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//应用约束文件</span><br><span class="line">//输入 -&gt; 后的命令</span><br><span class="line">-&gt; source scripts/MY_DESIGN.con</span><br><span class="line">-&gt; check_timing</span><br><span class="line">-&gt; report_clock</span><br><span class="line">-&gt; report_clock -skew</span><br><span class="line">-&gt; report_port -verbose</span><br><span class="line"></span><br><span class="line">-&gt; write_script -out scripts/MY_DESIGN.wscr</span><br><span class="line">-&gt; write -format ddc -hier -out unmapped/MY_DESIGN.ddc</span><br><span class="line">-&gt; exit</span><br><span class="line"></span><br><span class="line">//对比两个约束文件</span><br><span class="line">$ diff scripts/MY_DESIGN.wscr .solutions/MY_DESIGN.wscr</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="IC-Compiler-版图工具"><a href="#IC-Compiler-版图工具" class="headerlink" title="IC Compiler 版图工具"></a>IC Compiler 版图工具</h2><h3 id="Task-1-启动"><a href="#Task-1-启动" class="headerlink" title="Task 1 启动"></a>Task 1 启动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ cd digital_labs/ICC_2013.12-sp2</span><br><span class="line">$ tar -xvf ces_icc_2013.12-sp2.tar.gz		//解压ICC文件</span><br><span class="line"></span><br><span class="line">$ cd digital_labs/ICC_2013.12-sp2/IC_Compiler_2013.12-SP2/ORCA_TOP/rm_icc/tmp</span><br><span class="line">$ make restore_lab0</span><br><span class="line">$ make load									//启动版图工具</span><br><span class="line"></span><br><span class="line">-&gt; start_gui								//启动图形化界面</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="大作业"><a href="#大作业" class="headerlink" title="大作业"></a>大作业</h2><h3 id="实验一-序列检测电路"><a href="#实验一-序列检测电路" class="headerlink" title="实验一 序列检测电路"></a>实验一 序列检测电路</h3><h4 id="RTL设计"><a href="#RTL设计" class="headerlink" title="RTL设计"></a>RTL设计</h4><p>序列检测电路大多采用状态机实现，网上有大量代码可以复制<br>此处采用移位寄存器实现，较为简易（懒得自己写的可以变更变量名套用）</p>
+<ul>
+<li>设计文件project1.v</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//序列检测电路——10100</span></span><br><span class="line"><span class="comment">//采用移位寄存器设计,序列匹配则输出1，否则为0</span></span><br><span class="line"><span class="comment">//By SevenTao </span></span><br><span class="line"><span class="comment">//2021.7.1</span></span><br><span class="line"><span class="keyword">module</span> project1 (</span><br><span class="line">    <span class="keyword">input</span>       clk,                                    <span class="comment">//外部时钟</span></span><br><span class="line">    <span class="keyword">input</span>       rst,                                    <span class="comment">//外部复位，高电平有效</span></span><br><span class="line">    <span class="keyword">input</span>       data,                                   <span class="comment">//输入数据位</span></span><br><span class="line">    <span class="keyword">output</span>      res                                     <span class="comment">//输出检测结果</span></span><br><span class="line">);</span><br><span class="line">    <span class="keyword">reg</span>[<span class="number">4</span>:<span class="number">0</span>]    data_r;        <span class="comment">//5位存储输入数据流的寄存器</span></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(!rst)    data_r &lt;= &#123;data_r[<span class="number">3</span>:<span class="number">0</span>],data&#125;;       <span class="comment">//进行移位</span></span><br><span class="line">        <span class="keyword">else</span>        data_r &lt;= <span class="number">5&#x27;b00000</span>;                 <span class="comment">//复位清零</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assign</span> res = (data_r == <span class="number">5&#x27;b10100</span>) ? <span class="number">1&#x27;b1</span> : <span class="number">1&#x27;b0</span>;    <span class="comment">//序列检测逻辑</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>仿真文件project1_tb.v</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//序列检测电路仿真文件</span></span><br><span class="line"><span class="comment">//By SevenTao </span></span><br><span class="line"><span class="comment">//2021.7.1</span></span><br><span class="line"><span class="meta">`<span class="meta-keyword">timescale</span> 1ns/1ns</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> project1_tb;</span><br><span class="line">    <span class="keyword">reg</span>         clk;</span><br><span class="line">    <span class="keyword">reg</span>         rst;</span><br><span class="line">    <span class="keyword">reg</span>         data;</span><br><span class="line">    <span class="keyword">wire</span>        res;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//时钟、复位信号初始化</span></span><br><span class="line">    <span class="comment">//产生检测序列</span></span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        clk = <span class="number">0</span>;</span><br><span class="line">        rst = <span class="number">1</span>;</span><br><span class="line">        #<span class="number">5</span> rst=<span class="number">0</span>;</span><br><span class="line">        data = <span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">$stop</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//产生时钟信号</span></span><br><span class="line">    <span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//例化</span></span><br><span class="line">    project1 project1(</span><br><span class="line">        <span class="variable">.clk</span>(clk),</span><br><span class="line">        <span class="variable">.rst</span>(rst),</span><br><span class="line">        <span class="variable">.data</span>(data),</span><br><span class="line">        <span class="variable">.res</span>(res)</span><br><span class="line">    );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="仿真"><a href="#仿真" class="headerlink" title="仿真"></a>仿真</h4><p>Synopsys下VCS进行仿真时出现环境报错<br>用半天时间尝试修改环境变量之后依然出现了其他报错<br>因此推荐下载modelsim进行仿真<br>若非要用VCS，通过<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1-Dus8rN-fBCSwSVNAY4sKQ">此链接</a>下载新虚拟机使用（提取码：m4x4）</p>
+<h4 id="DC综合"><a href="#DC综合" class="headerlink" title="DC综合"></a>DC综合</h4><ul>
+<li>约束文件project1.con（#后为注释内容，注意结合自己的RTL设计文件更换变量）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#By SevenTao</span><br><span class="line">#2021.7.1</span><br><span class="line"></span><br><span class="line">#复位</span><br><span class="line">reset_design</span><br><span class="line"></span><br><span class="line">#时钟频率1Mhz对应1000ns</span><br><span class="line">#clk为RTL文件里的时钟端口变量名</span><br><span class="line">create_clock -period 1000 [get_ports clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的source latency为20ns</span><br><span class="line">set_clock_latency -source 20 [get_clocks clk] </span><br><span class="line"></span><br><span class="line">#时钟信号的network latency为20ns</span><br><span class="line">set_clock_latency 10 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的setup_uncertainty为学号后两位，我是69</span><br><span class="line">set_clock_uncertainty -setup 69 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的transition为5ns</span><br><span class="line">set_clock_transition 5 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#除clk之外输入信号最大延时为5ns</span><br><span class="line">#RTL设计文件中端口输入变量为data</span><br><span class="line">set_input_delay -max  5 -clock clk [get_ports data]</span><br><span class="line"></span><br><span class="line">#除clk之外输入信号使用bufbd1驱动</span><br><span class="line">set_driving_cell -lib_cell bufbd1 \</span><br><span class="line"> [remove_from_collection [all_inputs] [get_ports &quot;clk&quot;]]</span><br><span class="line"></span><br><span class="line">#输出信号延时为5ns</span><br><span class="line">set_output_delay 0.5 -clock clk [get_ports res]</span><br><span class="line"></span><br><span class="line">#输出信号连接负载电容1fF，即0.001pf</span><br><span class="line">set_load 0.001 [get_ports Cout*]</span><br><span class="line"></span><br><span class="line">#设置版图利用率为0.9</span><br><span class="line">set_utilization 0.9</span><br><span class="line"></span><br><span class="line">#设置版图的宽长比为1</span><br><span class="line">set_aspect_ratio 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>脚本文件dc.tcl</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//需要先在DC中手动读入脚本文件</span><br><span class="line">//然后再shell中运行本脚本文件</span><br><span class="line"></span><br><span class="line">//关联library，检查设计</span><br><span class="line">link</span><br><span class="line">check_design</span><br><span class="line"></span><br><span class="line">//应用约束文件</span><br><span class="line">source project1.con</span><br><span class="line">check_timing</span><br><span class="line"></span><br><span class="line">//report信息写至.rpt文件中</span><br><span class="line">redirect -tee -file rc.rpt &#123;report_constraint -all&#125;</span><br><span class="line">redirect -tee -file rt.rpt &#123;report_timing&#125;</span><br><span class="line">redirect -tee -file ra.rpt &#123;report_area&#125;</span><br><span class="line"></span><br><span class="line">//综合结果写入.ddc文件中</span><br><span class="line">write -f ddc -hier -out project1.ddc</span><br><span class="line"></span><br><span class="line">exit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DC综合</li>
+</ul>
+<p>综合时发现若直接在题目要求的目录（即SoCxxx）启动DC的话，会出现library的报错，即第一节课出现的同款错误，问题在于第一次课的环境配置仅应用于 lab1 下的.tcl，并没有配置到全局，因此推荐讲文件复制到 <strong>lab1 <strong>目录下的rtl与scripts文件夹下，此时在lab1目录下启动DC，具体操作类同于</strong>DC TASK1</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1</span><br><span class="line">$ design_vision -topo</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我在脚本里没有写读取verilog文件的操作，因此需要先手动读入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-&gt; read_verilog rtl/project1.v</span><br><span class="line">-&gt; source scripts/dc.tcl</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>读入之后可以运行脚本，但是整个脚本直接运行容易出错，依然推荐手动逐行输入命令，检查每条命令是否出错。产生的文件在目录下可以直接看到并用gedit打开。</p>
+<h3 id="实验二-I2C控制器版图设计"><a href="#实验二-I2C控制器版图设计" class="headerlink" title="实验二 I2C控制器版图设计"></a>实验二 I2C控制器版图设计</h3><p>需要现在虚拟机中设置共享文件夹<br>Unix下共享文件夹在mnt/hgfs下（双击computer进入filesystem）<br>右击解压压缩包（Extract here）<br>复制其中的rtl源码到自己的rtl文件夹下</p>
+<ul>
+<li>约束文件 i2c.con</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#By SevenTao</span><br><span class="line">#2021.7.1</span><br><span class="line"></span><br><span class="line">#复位</span><br><span class="line">reset_design</span><br><span class="line"></span><br><span class="line">#wb_clk_i = 32MHz</span><br><span class="line">create_clock -period 31 [get_ports wb_clk_i]</span><br><span class="line"></span><br><span class="line">#别的我实在找不到啥约束好写的了</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>脚本文件 i2c.tcl</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">link</span><br><span class="line">check_design</span><br><span class="line"></span><br><span class="line">source scripts/i2c.con</span><br><span class="line">check_timing</span><br><span class="line"></span><br><span class="line">write -f ddc -hier -out project1.ddc</span><br><span class="line"></span><br><span class="line">exit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DC综合</li>
+</ul>
+<p>同样推荐先将文件复制到lab1进行操作，操作和实验1相同</p>
+<ul>
+<li>icc.tcl</li>
+</ul>
+<p><code>~/digital_work/soc2020/scripts/icc.tcl</code><br>自己写一时半会是肯定写不出来的，就直接改改用吧</p>
+<ul>
+<li>版图</li>
+</ul>
+<p>floorplan,place,cts,route,finish都对应Guide的不同Task<br>但是如何用综合出来的ddc文件设计出版图我也不会，放弃了，裂开</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/myweb/tags/synopsys/" rel="tag"><i class="fa fa-tag"></i> synopsys</a>
+          
+            <a href="/myweb/tags/SoC/" rel="tag"><i class="fa fa-tag"></i> SoC</a>
+          
+            <a href="/myweb/tags/Verilog/" rel="tag"><i class="fa fa-tag"></i> Verilog</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myweb/2021/08/27/record/" rel="next" title="建站过程">
+                <i class="fa fa-chevron-left"></i> 建站过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/myweb/2021/08/30/Jobs-of-IC/" rel="prev" title="《胡说IC》随记">
+                《胡说IC》随记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/myweb/images/tao.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/myweb/archives">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/myweb/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/myweb/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/TSAW2000" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/6733863159" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SOC%E5%AE%9E%E9%AA%8C%E5%B7%A5%E5%85%B7%E4%B8%AD%E6%96%87%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">SOC实验工具中文指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Design-Compile-%E8%AE%BE%E8%AE%A1%E5%B7%A5%E5%85%B7"><span class="nav-number">1.1.</span> <span class="nav-text">Design Compile 设计工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-1-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">Task 1 环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-3-%E7%BA%A6%E6%9D%9F%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.2.</span> <span class="nav-text">Task 3 约束文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IC-Compiler-%E7%89%88%E5%9B%BE%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.</span> <span class="nav-text">IC Compiler 版图工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-1-%E5%90%AF%E5%8A%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">Task 1 启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E4%BD%9C%E4%B8%9A"><span class="nav-number">1.3.</span> <span class="nav-text">大作业</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%80-%E5%BA%8F%E5%88%97%E6%A3%80%E6%B5%8B%E7%94%B5%E8%B7%AF"><span class="nav-number">1.3.1.</span> <span class="nav-text">实验一 序列检测电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RTL%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">RTL设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BF%E7%9C%9F"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">仿真</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DC%E7%BB%BC%E5%90%88"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">DC综合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%8C-I2C%E6%8E%A7%E5%88%B6%E5%99%A8%E7%89%88%E5%9B%BE%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.2.</span> <span class="nav-text">实验二 I2C控制器版图设计</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">桃妖</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/myweb/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/myweb/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/myweb/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/myweb/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/myweb/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/myweb/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/myweb/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/myweb/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/myweb/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/myweb/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/myweb/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/myweb/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/myweb/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/myweb/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/myweb/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "vertical";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
