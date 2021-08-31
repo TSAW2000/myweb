@@ -95,41 +95,6 @@
       </tags>
   </entry>
   <entry>
-    <title>建站过程</title>
-    <url>/myweb/2021/08/27/record/</url>
-    <content><![CDATA[<h1 id="博客建站过程记录"><a href="#博客建站过程记录" class="headerlink" title="博客建站过程记录"></a>博客建站过程记录</h1><p>托管：github<br>框架：hexo<br>域名：暂无</p>
-<h3 id="一、Github建立仓库"><a href="#一、Github建立仓库" class="headerlink" title="一、Github建立仓库"></a>一、Github建立仓库</h3><ul>
-<li>Github新建空仓库：<br><a href="https://github.com/TSAW2000/myweb">TSAW2000/myweb (github.com)</a></li>
-</ul>
-<h3 id="二、Hexo配置"><a href="#二、Hexo配置" class="headerlink" title="二、Hexo配置"></a>二、Hexo配置</h3><ul>
-<li><p>文件夹路径：<code>F:/Seven/BlogWeb</code><br>//Seven为个人文件夹，blogweb为个人网站文件夹</p>
-</li>
-<li><p>路径下克隆空仓库：<code>git clone https://github.com/TSAW2000/myweb.git</code></p>
-</li>
-<li><p>新建文件夹<br>seventao:    博客框架主体文件夹<br>rec:               建站过程记录<br>src:               博客资源文件夹</p>
-</li>
-<li><p>文件夹路径： <code>F:/Seven/BlogWeb/seventao/seventao</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//git bash</span><br><span class="line">hexo init					///初始化框架</span><br><span class="line">npm install					//下载框架文件</span><br><span class="line">npm i hexo-renderer-swig	//没有这个会踩换主题后本地预览乱码的坑</span><br><span class="line">npm install hexo-deployer-git --save	//安装git部署插件</span><br><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next	//下载主题</span><br></pre></td></tr></table></figure></li>
-<li><p>记事本编辑_config.yml</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: ICant</span><br><span class="line">subtitle: IC ant. I can&#x27;t</span><br><span class="line">description: 学不会微电子，转行计算机</span><br><span class="line">keywords:</span><br><span class="line">author: NWPU_tao</span><br><span class="line">language: zh-Hans</span><br><span class="line">timezone: &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">//设置github部署</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:tsaw2000/myweb.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  </span><br><span class="line"># URL</span><br><span class="line">url: https://tsaw2000.github.io/myweb/</span><br><span class="line">root: /myweb.github.io</span><br><span class="line"></span><br><span class="line">theme: next		//设置主题</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="三、部署至github"><a href="#三、部署至github" class="headerlink" title="三、部署至github"></a>三、部署至github</h3><ul>
-<li><p>文件夹路径： <code>F:/Seven/BlogWeb/seventao/seventao</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g			//hexo generate 生成静态网站</span><br><span class="line">hexo s -p 80	//‘http://localhost:80’本地预览</span><br><span class="line">hexo d			//上传至github</span><br></pre></td></tr></table></figure></li>
-<li><p>Github仓库下：<code>settings -&gt; Pages -&gt; Branch:master /(root) -&gt; Save</code></p>
-</li>
-<li><p><a href="https://tsaw2000.github.io/myweb/">https://tsaw2000.github.io/myweb/</a>进行访问</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>ForFun</category>
-      </categories>
-      <tags>
-        <tag>Web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《胡说IC》随记</title>
     <url>/myweb/2021/08/30/Jobs-of-IC/</url>
     <content><![CDATA[<h1 id="《胡说IC-菜鸟工程师进阶》随记"><a href="#《胡说IC-菜鸟工程师进阶》随记" class="headerlink" title="《胡说IC-菜鸟工程师进阶》随记"></a>《胡说IC-菜鸟工程师进阶》随记</h1><h2 id="岗位分析"><a href="#岗位分析" class="headerlink" title="岗位分析"></a>岗位分析</h2><h3 id="集成电路算法工程师"><a href="#集成电路算法工程师" class="headerlink" title="集成电路算法工程师"></a>集成电路算法工程师</h3><h4 id="岗位内容"><a href="#岗位内容" class="headerlink" title="岗位内容"></a>岗位内容</h4><ul>
@@ -299,6 +264,259 @@
       </categories>
       <tags>
         <tag>Jobs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建站过程</title>
+    <url>/myweb/2021/08/27/record/</url>
+    <content><![CDATA[<h1 id="博客建站过程记录"><a href="#博客建站过程记录" class="headerlink" title="博客建站过程记录"></a>博客建站过程记录</h1><p>托管：github<br>框架：hexo<br>域名：暂无</p>
+<h3 id="一、Github建立仓库"><a href="#一、Github建立仓库" class="headerlink" title="一、Github建立仓库"></a>一、Github建立仓库</h3><ul>
+<li>Github新建空仓库：<br><a href="https://github.com/TSAW2000/myweb">TSAW2000/myweb (github.com)</a></li>
+</ul>
+<h3 id="二、Hexo配置"><a href="#二、Hexo配置" class="headerlink" title="二、Hexo配置"></a>二、Hexo配置</h3><ul>
+<li><p>文件夹路径：<code>F:/Seven/BlogWeb</code><br>//Seven为个人文件夹，blogweb为个人网站文件夹</p>
+</li>
+<li><p>路径下克隆空仓库：<code>git clone https://github.com/TSAW2000/myweb.git</code></p>
+</li>
+<li><p>新建文件夹<br>seventao:    博客框架主体文件夹<br>rec:               建站过程记录<br>src:               博客资源文件夹</p>
+</li>
+<li><p>文件夹路径： <code>F:/Seven/BlogWeb/seventao/seventao</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//git bash</span><br><span class="line">hexo init					///初始化框架</span><br><span class="line">npm install					//下载框架文件</span><br><span class="line">npm i hexo-renderer-swig	//没有这个会踩换主题后本地预览乱码的坑</span><br><span class="line">npm install hexo-deployer-git --save	//安装git部署插件</span><br><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next	//下载主题</span><br></pre></td></tr></table></figure></li>
+<li><p>记事本编辑_config.yml</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: ICant</span><br><span class="line">subtitle: IC ant. I can&#x27;t</span><br><span class="line">description: 学不会微电子，转行计算机</span><br><span class="line">keywords:</span><br><span class="line">author: NWPU_tao</span><br><span class="line">language: zh-Hans</span><br><span class="line">timezone: &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">//设置github部署</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:tsaw2000/myweb.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  </span><br><span class="line"># URL</span><br><span class="line">url: https://tsaw2000.github.io/myweb/</span><br><span class="line">root: /myweb.github.io</span><br><span class="line"></span><br><span class="line">theme: next		//设置主题</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="三、部署至github"><a href="#三、部署至github" class="headerlink" title="三、部署至github"></a>三、部署至github</h3><ul>
+<li><p>文件夹路径： <code>F:/Seven/BlogWeb/seventao/seventao</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g			//hexo generate 生成静态网站</span><br><span class="line">hexo s -p 80	//‘http://localhost:80’本地预览</span><br><span class="line">hexo d			//上传至github</span><br></pre></td></tr></table></figure></li>
+<li><p>Github仓库下：<code>settings -&gt; Pages -&gt; Branch:master /(root) -&gt; Save</code></p>
+</li>
+<li><p><a href="https://tsaw2000.github.io/myweb/">https://tsaw2000.github.io/myweb/</a>进行访问</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>ForFun</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《CPU设计—胡振波》随记</title>
+    <url>/myweb/2021/08/31/record-of-CPUdesign/</url>
+    <content><![CDATA[<h1 id="《CPU设计—胡振波》随记"><a href="#《CPU设计—胡振波》随记" class="headerlink" title="《CPU设计—胡振波》随记"></a>《CPU设计—胡振波》随记</h1><p><strong>本书学习目的</strong></p>
+<ul>
+<li>工业级verilogRTL数字IC设计的精髓与技巧</li>
+<li>计算机体系结构的清晰认知</li>
+<li>参照真实CPU案例的RISC-V架构处理器自主设计</li>
+</ul>
+<p><strong>书本包含了三大部分及附录</strong></p>
+<ul>
+<li>CPU和RISC-V的综述</li>
+<li>基于蜂鸟E200系列处理核使用verilog设计CPU</li>
+<li>verilog仿真以及在FPGA SoC原型上运行软件</li>
+<li>附录—RISC架构相关</li>
+</ul>
+<blockquote>
+<p>书内推荐文章<br>《再见，SPARC处理器！再见，SUN》<br>《RISC-V登场，Intel和ARM会怕吗》<br>《三星开发RISC-V架构自主CPU内核》<br>《直指移动芯片市场，开源的处理器指令集架构发布》<br>《进入32位时代，谁能成为下一个8051》</p>
+</blockquote>
+<hr>
+<h2 id="CPU和RISC-V综述"><a href="#CPU和RISC-V综述" class="headerlink" title="CPU和RISC-V综述"></a>CPU和RISC-V综述</h2><h3 id="CPU概述"><a href="#CPU概述" class="headerlink" title="CPU概述"></a>CPU概述</h3><ol>
+<li><strong>架构</strong>，即指令集架构，指构成处理器底层硬件与运行在其上的软件之间的抽象层。是区分不同CPU的主要标准。<br>架构的位数：32位与64位。指的是通用寄存器的宽度，决定其能够寻址的范围。</li>
+<li><strong>分类</strong>：<br>CISC：复杂指令集。如 x86<br>RISC：精简指令集。如 SPARC、MIPS、Power、ARC、ARM等</li>
+<li><strong>举例</strong>：<br>x86:Intel（“微码化”——Intel将复杂CISC指令用硬件解码器翻译为对应的内部简单指令序列）、AMD、北大众志、兆芯、海光<br>ARM：海思、展讯、飞腾、华芯通<br>MIPS：龙芯、君正</li>
+</ol>
+<h3 id="RISC-V介绍"><a href="#RISC-V介绍" class="headerlink" title="RISC-V介绍"></a>RISC-V介绍</h3><p>其架构文档分为“指令集文档”和“特权架构文档“<br>其指令集采用模块化的方式，每个模块使用一个英文字母表示。</p>
+<ul>
+<li><strong>基本指令集</strong></li>
+</ul>
+<ol>
+<li>RV32I：指令数47，32位地址空间与整数指令，支持32个通用整数寄存器</li>
+<li>RV32E：指令数47，RV32I的子集，仅支持16个通用整数寄存器</li>
+<li>RV64I：指令数59，64位地址空间与整数指令以及一部分32位整数指令</li>
+<li>RV128I：指令数71，128位地址空间与整数指令及一部分64位和32位指令</li>
+</ol>
+<ul>
+<li><strong>拓展指令集</strong></li>
+</ul>
+<ol>
+<li>M：指令数8，整数乘除法指令</li>
+<li>A：指令数11，存储器原子操作指令</li>
+<li>F：指令数26，单精度（32bit）浮点指令</li>
+<li>D：指令数26，双精度（64bit）浮点指令</li>
+<li>C：指令数46，长度为16位的压缩指令<br>最基本且必须实现 I：基本整数指令子集。<br>通用组合 G：为IMAFD组合</li>
+</ol>
+<ul>
+<li><strong>指令编码</strong><br>非常规整，通用寄存器的索引都放在固定位置，指令译码器可以便捷译码出寄存器索引然后读取通用寄存器组</li>
+<li><strong>简介运算指令</strong></li>
+</ul>
+<ol>
+<li>I：整数的加减、移位、按位逻辑操作和比较操作</li>
+<li>M：有符号和无符号整数的乘除</li>
+<li>F、D：浮点加减乘除、乘累加、开平方根、比较等；整数与浮点数、单与双精度的格式转换操作。</li>
+<li>对运算指令错误均不产生异常，而是产生某个特殊值，设置某些状态寄存器的状态位</li>
+</ol>
+<ul>
+<li><strong>存储器访问指令</strong><br>使用专用的读（Load）写（Store）指令访问存储器。<br>访问的最基本单位是字节。</li>
+<li><strong>分支跳转指令</strong><br>包括两条无条件和六条有条件指令，以下为无条件指令</li>
+</ul>
+<ol>
+<li>jal：跳转链接指令。调用子程序，将子程序返回地址存在链接寄存器中。</li>
+<li>jalr：跳转链接寄存器指令。用于子程序返回指令，将jal指令保存的链接寄存器用于jalr指令的基地址寄存器，实现从子程序返回。</li>
+</ol>
+<ul>
+<li><strong>压缩指令子集</strong><br>I 中指令长度均为等长的32位，子集C中指令均为16位，且每条均能与I中对应</li>
+<li><strong>工作模式</strong></li>
+</ul>
+<ol>
+<li>M mode：机器模式。</li>
+<li>S mode：监督模式。</li>
+<li>U mode：用户模式。<br>M必选，S和U可选，不同组合可以实现不同系统</li>
+</ol>
+<ul>
+<li><strong>其他</strong></li>
+</ul>
+<ol>
+<li>子程序调用指令放弃RISC架构中的一次多写与多读</li>
+<li>无条件码：放弃RISC架构中带“条件码”指令</li>
+<li>无分支延迟槽：分支延迟槽指分支指令后跟随不受分支指令跳转影响的指令</li>
+<li>零开销硬件循环：硬件上利用循环次数寄存器实现循环计数</li>
+<li>定义了控制和状态寄存器(CSR)：用以配置和记录运行状态</li>
+<li>预留了大量指令空间可用于自定义扩展</li>
+</ol>
+<h3 id="RISC-V工具链"><a href="#RISC-V工具链" class="headerlink" title="RISC-V工具链"></a>RISC-V工具链</h3><blockquote>
+<p>“riscv-tools” on GitHub</p>
+</blockquote>
+<ul>
+<li><strong>Spike模拟器</strong><br>以下三个工具协作可以运行完整程序</li>
+</ul>
+<ol>
+<li>riscv-fesvr：上位机与CPU之间通信</li>
+<li>riscv-pk：可执行文件运行环境，提供最简单的bootloader</li>
+<li>risc-isa-sin：基于C/C++的指令集模拟器</li>
+</ol>
+<ul>
+<li><strong>riscv-gnu-toolchain GNU工具链</strong></li>
+</ul>
+<ol>
+<li>riscv-gcc：GCC编译器</li>
+<li>riscv-binutils-gdb：二进制工具、GDB调试工具</li>
+<li>riscv-glibc：GNU C标准库实现</li>
+<li>riscv-llvm：基于LLVM编译器的框架</li>
+<li>riscv-openocd：基于OpenOCD的调试器</li>
+<li>riscv-opcodes：操作码信息转换脚本</li>
+<li>riscv-tests：一组指令集测试用例</li>
+<li>riscv-qemu：QEMU模拟器</li>
+</ol>
+<h3 id="蜂鸟E200介绍"><a href="#蜂鸟E200介绍" class="headerlink" title="蜂鸟E200介绍"></a>蜂鸟E200介绍</h3><p>“e200_opensource” on GitHub</p>
+<ul>
+<li>两级流水线结构</li>
+<li>开源的E203核可以配置为RV32IMAC/RV32EMAC，仅支持M mode</li>
+<li>提供完整SoC设计工具链</li>
+</ul>
+<h2 id="基于蜂鸟E200系列处理核使用verilog设计CPU"><a href="#基于蜂鸟E200系列处理核使用verilog设计CPU" class="headerlink" title="基于蜂鸟E200系列处理核使用verilog设计CPU"></a>基于蜂鸟E200系列处理核使用verilog设计CPU</h2><ul>
+<li><strong>所需背景知识</strong></li>
+</ul>
+<ol>
+<li>熟悉汇编语言及其执行过程</li>
+<li>了解软件经编译、汇编、链接最后成为可执行二进制码的过程</li>
+<li>了解计算机体系结构</li>
+<li>深刻理解电路和逻辑设计</li>
+</ol>
+<ul>
+<li><strong>验证层面</strong></li>
+</ul>
+<ol>
+<li>模块级验证（UVM）</li>
+<li>汇编语言测试用例</li>
+<li>高级语言测试用例</li>
+</ol>
+<h3 id="Verilog-RTL编码风格"><a href="#Verilog-RTL编码风格" class="headerlink" title="Verilog RTL编码风格"></a>Verilog RTL编码风格</h3><ul>
+<li><strong>使用标准DFF模块例化生成寄存器</strong><br>即采用例化的方式实现寄存器，DDF模块内部则用always块编写</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> sirv_gnrl_dfflr #(</span><br><span class="line">	<span class="keyword">parameter</span> DW = <span class="number">32</span></span><br><span class="line">)	(</span><br><span class="line">	<span class="keyword">input</span> lden, <span class="comment">//使能</span></span><br><span class="line">	<span class="keyword">input</span> [DW-<span class="number">1</span>:<span class="number">0</span>] dnxt, <span class="comment">//输入</span></span><br><span class="line">	<span class="keyword">output</span> [DW-<span class="number">1</span>:<span class="number">0</span>] qout <span class="comment">//输出</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">input</span> clk, <span class="comment">//时钟</span></span><br><span class="line">	<span class="keyword">input</span> rst_n <span class="comment">//复位</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">reg</span> [DW-<span class="number">1</span>:<span class="number">0</span>] qout_r; <span class="comment">//定义寄存器</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> rst_n)</span><br><span class="line"><span class="keyword">begin</span> : DFFLR_PROC</span><br><span class="line">	<span class="keyword">if</span> (rst_n == <span class="number">1</span>’b0)</span><br><span class="line">		qout_r &lt;= &#123;DW&#123;<span class="number">1</span>’b0&#125;&#125;;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (lden == <span class="number">1</span>’b1)</span><br><span class="line">		qout_r &lt;= dnxt</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> qout = qout_r;</span><br><span class="line"></span><br><span class="line"><span class="comment">//以下还有利用断言（assertion）对lden信号为不定态进行捕捉的代码</span></span><br><span class="line"><span class="comment">//但我看不懂，就先不写了</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//例化生成flg_dfflr寄存器代码</span></span><br><span class="line">sirv_gnrl_dfflr <span class="variable">#(32) flg_dfflrs(flg_ena,flg_nxt,flg_r,clk,rst_n)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>assign代替if-else和case</strong><br>if-else和case语句无法传播不定态，且assign能保证综合生成并行选择电路<br><code>assign out = a ? in1 : in2</code></li>
+</ul>
+<h3 id="蜂鸟开源E203模块划分"><a href="#蜂鸟开源E203模块划分" class="headerlink" title="蜂鸟开源E203模块划分"></a>蜂鸟开源E203模块划分</h3><ul>
+<li><strong>e203_cpu_top</strong>：顶层模块<ul>
+<li>e203_srams：包括ITCM和DTCM的所有SRAM</li>
+<li><strong>e203_cpu</strong>：处理器核所有逻辑部分<ul>
+<li>e203_clk_ctrl：各组件自动时钟门控</li>
+<li>e203_irq_sync：外界异步中断信号进行同步</li>
+<li>e203_reset_ctrl：外界异步复位变成同步</li>
+<li>e203_itcm_ctrl：控制ITCM访问</li>
+<li>e203_dtcm_ctrl：控制DTCM访问</li>
+<li><strong>e203_core</strong>：核的主体<ul>
+<li>e203_ifu：取指令单元</li>
+<li>e203_exu：执行单元</li>
+<li>e203_lsu：存储器访问单元</li>
+<li>e203_biu：总线接口单元 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="蜂鸟E200系列流水线结构"><a href="#蜂鸟E200系列流水线结构" class="headerlink" title="蜂鸟E200系列流水线结构"></a>蜂鸟E200系列流水线结构</h3><p>变长流水线结构</p>
+<ol>
+<li>第一级为“取指(IFU)”</li>
+<li>第二级为”译码(EXU)”、“执行(EXU)”和“写回(WB)”</li>
+<li>第三级为“访存(LSU)”和“写回(WB)”</li>
+</ol>
+<h3 id="蜂鸟E200系列取指实现"><a href="#蜂鸟E200系列取指实现" class="headerlink" title="蜂鸟E200系列取指实现"></a>蜂鸟E200系列取指实现</h3><p>包括IFU模块和ITCM模块</p>
+<ul>
+<li>IFU</li>
+</ul>
+<ol>
+<li><strong>Mini-Decode 简单译码</strong><br>对取回的指令进行部分译码，只需译出指令的类型细节，其内部例化调用一个完整的Decode模块，不需要的输入接0，输出悬空。</li>
+<li><strong>Simple-BPU 分支预测</strong><br>采用最简单的静态预测<ol>
+<li>带条件直接跳转<br>向后跳转预测为跳（即立即数表示的偏移量offset为负数），使用其PC和        offset相加得到跳转目标地址。</li>
+<li>无条件直接跳转<br>使用其PC和立即数表示的offset相加得到其跳转目标地址。</li>
+<li>无条件间接跳转<br>基地址来自于其rs1索引的操作数，需要从通用寄存器（Regfile）中读取，    根据索引值的不同采取不同的方案。<ul>
+<li>rs1的索引号是x0，则直接使用常数0</li>
+<li>rs1的索引号是x1，将x1从处于EXU的regfile中直接拉线取出，不用占用读端口。此处进行了加速。同时需要判定EXU有没有写回x1以及OITF是否为空以防止造成RAW数据相关性。</li>
+<li>rs1的索引为其他，则使用Regfile的第一个读端口读出。需要判定1端口是否空闲且不存在资源冲突，同时需要判定EXU中无指令以防止造成RAW数据相关性。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>PC生成</strong><br>其逻辑用于产生下一个待取指令的PC<ol>
+<li>reset后第一次取指，则使用顶层输入信号pc_rtvec指示的值作为第一次取指的PC值</li>
+<li>对于顺序取指，若指令为16位，则PC=PC+2，若为32位，则PC+4</li>
+<li>分支指令则使用Simple—BPU预测的跳转目标地址。</li>
+<li>来自EXU的流水冲刷则使用EXU送来的新PC值。</li>
+</ol>
+</li>
+<li><strong>访问ITCM和BIU</strong><ol>
+<li>剩余缓存技术<ul>
+<li>ITCM为64位SRAM，其输出可在下次读或者写前保持</li>
+<li>IFU每次取32位，因此两次取指只访问一次</li>
+<li>若为顺序取指，且一条32位指令超边界，则将当前SRAM输出的最高16位存入16位宽的的剩余缓存中，在新的访问时将SRAM中的低16位与剩余缓存中的16位拼接为完整的32位指令，仍能等效为一个周期取32位指令。</li>
+<li>若为非顺序取指，就需要连续两次ITCM读操作，需要两个周期的访问才能取回32位指令。</li>
+</ul>
+</li>
+<li>ICB接口协议<ul>
+<li>IFU使用蜂鸟E200自定义的ICB接口协议访问ITCM和BIU。</li>
+<li>IFU访问ITCM接口位宽为64位，访问BIU接口位宽为32位。</li>
+<li>根据IFU访问的地址区间判断对ITCM还是BIU访问</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>挖个坑，学期结束了书也换了，考完研再回来更</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Digital Design</category>
+      </categories>
+      <tags>
+        <tag>Verilog</tag>
+        <tag>CPU</tag>
       </tags>
   </entry>
 </search>
