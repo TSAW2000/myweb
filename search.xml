@@ -1,100 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>SoC实验工具中文指南</title>
-    <url>/myweb/2021/08/30/Guide-of-SoC-class/</url>
-    <content><![CDATA[<h1 id="SOC实验工具中文指南"><a href="#SOC实验工具中文指南" class="headerlink" title="SOC实验工具中文指南"></a>SOC实验工具中文指南</h1><p>仅涉及课堂上老师要求完成的操作以及<strong>大作业</strong>内容<br>具体内容还得自己耐心阅读三本指南</p>
-<h2 id="Design-Compile-设计工具"><a href="#Design-Compile-设计工具" class="headerlink" title="Design Compile 设计工具"></a>Design Compile 设计工具</h2><h3 id="Task-1-环境配置"><a href="#Task-1-环境配置" class="headerlink" title="Task 1 环境配置"></a>Task 1 环境配置</h3><ul>
-<li><p>下载VMwareTool 15版本以上</p>
-</li>
-<li><p>解压所下载的压缩包，用VM打开虚拟机</p>
-</li>
-<li><p>Unix终端基本指令：桌面右击 “open in terminal”</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//输入$之后的指令</span><br><span class="line">$ cd &lt;file name&gt;			//进入文件夹目录</span><br><span class="line">$ cd ..					//返回上级目录</span><br><span class="line">$ ls						//列出本目录下级目录</span><br><span class="line">$ ls -al					//列出本目录下所有内容</span><br><span class="line">$ gedit &lt;file name&gt;		//文本编辑器打开文件，若&lt;file name&gt;不存在则新建 </span><br></pre></td></tr></table></figure></li>
-<li><p>配置软件环境变量</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1		//进入lab1目录</span><br><span class="line">$ gedit common_setup.tcl							//文本编辑器编辑</span><br><span class="line"></span><br><span class="line">//按照技术文档表格编辑相关变量路径</span><br></pre></td></tr></table></figure></li>
-<li><p>检查环境变量是否正确</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1		//进入lab1目录</span><br><span class="line">$ design_vision -topo								//启动软件图形化界面（GUI）</span><br><span class="line"></span><br><span class="line">//GUI顶部工具栏：File -&gt;  setup</span><br><span class="line">//libirary路径为上一步修改的路径则环境变量配置正确</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="Task-3-约束文件"><a href="#Task-3-约束文件" class="headerlink" title="Task 3 约束文件"></a>Task 3 约束文件</h3><ul>
-<li><p>新建约束文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab3/scripts</span><br><span class="line">$ gedit MY_DESIGN.con										//新建约束文件</span><br><span class="line"></span><br><span class="line">//自己想办法把约束文件写了</span><br><span class="line">//不过我猜你写不来</span><br><span class="line">//那下面就直接带你抄答案</span><br><span class="line"></span><br><span class="line">$ cd ..					//返回上级lab3目录</span><br><span class="line">$ ls -al				//展开下级全部目录</span><br><span class="line">$ cd .solution			//进入到.solution目录</span><br><span class="line">$ gedit MY_DESIGN.con	//文本编辑器打开已有的约束文件</span><br></pre></td></tr></table></figure></li>
-<li><p>应用约束文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab3</span><br><span class="line">$ design_vision -topo		//进入DC GUI界面</span><br></pre></td></tr></table></figure>
-
-<p>打开设计文件 <code>rtl/MY_DESIGN.v</code><br>link(关联) library<br>检查    <code>-&gt; check_library</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//应用约束文件</span><br><span class="line">//输入 -&gt; 后的命令</span><br><span class="line">-&gt; source scripts/MY_DESIGN.con</span><br><span class="line">-&gt; check_timing</span><br><span class="line">-&gt; report_clock</span><br><span class="line">-&gt; report_clock -skew</span><br><span class="line">-&gt; report_port -verbose</span><br><span class="line"></span><br><span class="line">-&gt; write_script -out scripts/MY_DESIGN.wscr</span><br><span class="line">-&gt; write -format ddc -hier -out unmapped/MY_DESIGN.ddc</span><br><span class="line">-&gt; exit</span><br><span class="line"></span><br><span class="line">//对比两个约束文件</span><br><span class="line">$ diff scripts/MY_DESIGN.wscr .solutions/MY_DESIGN.wscr</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="IC-Compiler-版图工具"><a href="#IC-Compiler-版图工具" class="headerlink" title="IC Compiler 版图工具"></a>IC Compiler 版图工具</h2><h3 id="Task-1-启动"><a href="#Task-1-启动" class="headerlink" title="Task 1 启动"></a>Task 1 启动</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_labs/ICC_2013.12-sp2</span><br><span class="line">$ tar -xvf ces_icc_2013.12-sp2.tar.gz		//解压ICC文件</span><br><span class="line"></span><br><span class="line">$ cd digital_labs/ICC_2013.12-sp2/IC_Compiler_2013.12-SP2/ORCA_TOP/rm_icc/tmp</span><br><span class="line">$ make restore_lab0</span><br><span class="line">$ make load									//启动版图工具</span><br><span class="line"></span><br><span class="line">-&gt; start_gui								//启动图形化界面</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="大作业"><a href="#大作业" class="headerlink" title="大作业"></a>大作业</h2><h3 id="实验一-序列检测电路"><a href="#实验一-序列检测电路" class="headerlink" title="实验一 序列检测电路"></a>实验一 序列检测电路</h3><h4 id="RTL设计"><a href="#RTL设计" class="headerlink" title="RTL设计"></a>RTL设计</h4><p>序列检测电路大多采用状态机实现，网上有大量代码可以复制<br>此处采用移位寄存器实现，较为简易（懒得自己写的可以变更变量名套用）</p>
-<ul>
-<li>设计文件project1.v</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">//序列检测电路——10100</span></span><br><span class="line"><span class="comment">//采用移位寄存器设计,序列匹配则输出1，否则为0</span></span><br><span class="line"><span class="comment">//By SevenTao </span></span><br><span class="line"><span class="comment">//2021.7.1</span></span><br><span class="line"><span class="keyword">module</span> project1 (</span><br><span class="line">    <span class="keyword">input</span>       clk,                                    <span class="comment">//外部时钟</span></span><br><span class="line">    <span class="keyword">input</span>       rst,                                    <span class="comment">//外部复位，高电平有效</span></span><br><span class="line">    <span class="keyword">input</span>       data,                                   <span class="comment">//输入数据位</span></span><br><span class="line">    <span class="keyword">output</span>      res                                     <span class="comment">//输出检测结果</span></span><br><span class="line">);</span><br><span class="line">    <span class="keyword">reg</span>[<span class="number">4</span>:<span class="number">0</span>]    data_r;        <span class="comment">//5位存储输入数据流的寄存器</span></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(!rst)    data_r &lt;= &#123;data_r[<span class="number">3</span>:<span class="number">0</span>],data&#125;;       <span class="comment">//进行移位</span></span><br><span class="line">        <span class="keyword">else</span>        data_r &lt;= <span class="number">5&#x27;b00000</span>;                 <span class="comment">//复位清零</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assign</span> res = (data_r == <span class="number">5&#x27;b10100</span>) ? <span class="number">1&#x27;b1</span> : <span class="number">1&#x27;b0</span>;    <span class="comment">//序列检测逻辑</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>仿真文件project1_tb.v</li>
-</ul>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">//序列检测电路仿真文件</span></span><br><span class="line"><span class="comment">//By SevenTao </span></span><br><span class="line"><span class="comment">//2021.7.1</span></span><br><span class="line"><span class="meta">`<span class="meta-keyword">timescale</span> 1ns/1ns</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> project1_tb;</span><br><span class="line">    <span class="keyword">reg</span>         clk;</span><br><span class="line">    <span class="keyword">reg</span>         rst;</span><br><span class="line">    <span class="keyword">reg</span>         data;</span><br><span class="line">    <span class="keyword">wire</span>        res;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//时钟、复位信号初始化</span></span><br><span class="line">    <span class="comment">//产生检测序列</span></span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        clk = <span class="number">0</span>;</span><br><span class="line">        rst = <span class="number">1</span>;</span><br><span class="line">        #<span class="number">5</span> rst=<span class="number">0</span>;</span><br><span class="line">        data = <span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">$stop</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//产生时钟信号</span></span><br><span class="line">    <span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//例化</span></span><br><span class="line">    project1 project1(</span><br><span class="line">        <span class="variable">.clk</span>(clk),</span><br><span class="line">        <span class="variable">.rst</span>(rst),</span><br><span class="line">        <span class="variable">.data</span>(data),</span><br><span class="line">        <span class="variable">.res</span>(res)</span><br><span class="line">    );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="仿真"><a href="#仿真" class="headerlink" title="仿真"></a>仿真</h4><p>Synopsys下VCS进行仿真时出现环境报错<br>用半天时间尝试修改环境变量之后依然出现了其他报错<br>因此推荐下载modelsim进行仿真<br>若非要用VCS，通过<a href="https://pan.baidu.com/s/1-Dus8rN-fBCSwSVNAY4sKQ">此链接</a>下载新虚拟机使用（提取码：m4x4）</p>
-<h4 id="DC综合"><a href="#DC综合" class="headerlink" title="DC综合"></a>DC综合</h4><ul>
-<li>约束文件project1.con（#后为注释内容，注意结合自己的RTL设计文件更换变量）</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#By SevenTao</span><br><span class="line">#2021.7.1</span><br><span class="line"></span><br><span class="line">#复位</span><br><span class="line">reset_design</span><br><span class="line"></span><br><span class="line">#时钟频率1Mhz对应1000ns</span><br><span class="line">#clk为RTL文件里的时钟端口变量名</span><br><span class="line">create_clock -period 1000 [get_ports clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的source latency为20ns</span><br><span class="line">set_clock_latency -source 20 [get_clocks clk] </span><br><span class="line"></span><br><span class="line">#时钟信号的network latency为20ns</span><br><span class="line">set_clock_latency 10 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的setup_uncertainty为学号后两位，我是69</span><br><span class="line">set_clock_uncertainty -setup 69 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的transition为5ns</span><br><span class="line">set_clock_transition 5 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#除clk之外输入信号最大延时为5ns</span><br><span class="line">#RTL设计文件中端口输入变量为data</span><br><span class="line">set_input_delay -max  5 -clock clk [get_ports data]</span><br><span class="line"></span><br><span class="line">#除clk之外输入信号使用bufbd1驱动</span><br><span class="line">set_driving_cell -lib_cell bufbd1 \</span><br><span class="line"> [remove_from_collection [all_inputs] [get_ports &quot;clk&quot;]]</span><br><span class="line"></span><br><span class="line">#输出信号延时为5ns</span><br><span class="line">set_output_delay 0.5 -clock clk [get_ports res]</span><br><span class="line"></span><br><span class="line">#输出信号连接负载电容1fF，即0.001pf</span><br><span class="line">set_load 0.001 [get_ports Cout*]</span><br><span class="line"></span><br><span class="line">#设置版图利用率为0.9</span><br><span class="line">set_utilization 0.9</span><br><span class="line"></span><br><span class="line">#设置版图的宽长比为1</span><br><span class="line">set_aspect_ratio 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>脚本文件dc.tcl</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//需要先在DC中手动读入脚本文件</span><br><span class="line">//然后再shell中运行本脚本文件</span><br><span class="line"></span><br><span class="line">//关联library，检查设计</span><br><span class="line">link</span><br><span class="line">check_design</span><br><span class="line"></span><br><span class="line">//应用约束文件</span><br><span class="line">source project1.con</span><br><span class="line">check_timing</span><br><span class="line"></span><br><span class="line">//report信息写至.rpt文件中</span><br><span class="line">redirect -tee -file rc.rpt &#123;report_constraint -all&#125;</span><br><span class="line">redirect -tee -file rt.rpt &#123;report_timing&#125;</span><br><span class="line">redirect -tee -file ra.rpt &#123;report_area&#125;</span><br><span class="line"></span><br><span class="line">//综合结果写入.ddc文件中</span><br><span class="line">write -f ddc -hier -out project1.ddc</span><br><span class="line"></span><br><span class="line">exit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>DC综合</li>
-</ul>
-<p>综合时发现若直接在题目要求的目录（即SoCxxx）启动DC的话，会出现library的报错，即第一节课出现的同款错误，问题在于第一次课的环境配置仅应用于 lab1 下的.tcl，并没有配置到全局，因此推荐讲文件复制到 <strong>lab1 <strong>目录下的rtl与scripts文件夹下，此时在lab1目录下启动DC，具体操作类同于</strong>DC TASK1</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1</span><br><span class="line">$ design_vision -topo</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>我在脚本里没有写读取verilog文件的操作，因此需要先手动读入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-&gt; read_verilog rtl/project1.v</span><br><span class="line">-&gt; source scripts/dc.tcl</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>读入之后可以运行脚本，但是整个脚本直接运行容易出错，依然推荐手动逐行输入命令，检查每条命令是否出错。产生的文件在目录下可以直接看到并用gedit打开。</p>
-<h3 id="实验二-I2C控制器版图设计"><a href="#实验二-I2C控制器版图设计" class="headerlink" title="实验二 I2C控制器版图设计"></a>实验二 I2C控制器版图设计</h3><p>需要现在虚拟机中设置共享文件夹<br>Unix下共享文件夹在mnt/hgfs下（双击computer进入filesystem）<br>右击解压压缩包（Extract here）<br>复制其中的rtl源码到自己的rtl文件夹下</p>
-<ul>
-<li>约束文件 i2c.con</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#By SevenTao</span><br><span class="line">#2021.7.1</span><br><span class="line"></span><br><span class="line">#复位</span><br><span class="line">reset_design</span><br><span class="line"></span><br><span class="line">#wb_clk_i = 32MHz</span><br><span class="line">create_clock -period 31 [get_ports wb_clk_i]</span><br><span class="line"></span><br><span class="line">#别的我实在找不到啥约束好写的了</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>脚本文件 i2c.tcl</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">link</span><br><span class="line">check_design</span><br><span class="line"></span><br><span class="line">source scripts/i2c.con</span><br><span class="line">check_timing</span><br><span class="line"></span><br><span class="line">write -f ddc -hier -out project1.ddc</span><br><span class="line"></span><br><span class="line">exit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>DC综合</li>
-</ul>
-<p>同样推荐先将文件复制到lab1进行操作，操作和实验1相同</p>
-<ul>
-<li>icc.tcl</li>
-</ul>
-<p><code>~/digital_work/soc2020/scripts/icc.tcl</code><br>自己写一时半会是肯定写不出来的，就直接改改用吧</p>
-<ul>
-<li>版图</li>
-</ul>
-<p>floorplan,place,cts,route,finish都对应Guide的不同Task<br>但是如何用综合出来的ddc文件设计出版图我也不会，放弃了，裂开</p>
-]]></content>
-      <categories>
-        <category>NPUclasses</category>
-      </categories>
-      <tags>
-        <tag>synopsys</tag>
-        <tag>SoC</tag>
-        <tag>Verilog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《胡说IC》随记</title>
     <url>/myweb/2021/08/30/Jobs-of-IC/</url>
     <content><![CDATA[<h1 id="《胡说IC-菜鸟工程师进阶》随记"><a href="#《胡说IC-菜鸟工程师进阶》随记" class="headerlink" title="《胡说IC-菜鸟工程师进阶》随记"></a>《胡说IC-菜鸟工程师进阶》随记</h1><h2 id="岗位分析"><a href="#岗位分析" class="headerlink" title="岗位分析"></a>岗位分析</h2><h3 id="集成电路算法工程师"><a href="#集成电路算法工程师" class="headerlink" title="集成电路算法工程师"></a>集成电路算法工程师</h3><h4 id="岗位内容"><a href="#岗位内容" class="headerlink" title="岗位内容"></a>岗位内容</h4><ul>
@@ -264,6 +170,100 @@
       </categories>
       <tags>
         <tag>Jobs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SoC实验工具中文指南</title>
+    <url>/myweb/2021/08/30/Guide-of-SoC-class/</url>
+    <content><![CDATA[<h1 id="SOC实验工具中文指南"><a href="#SOC实验工具中文指南" class="headerlink" title="SOC实验工具中文指南"></a>SOC实验工具中文指南</h1><p>仅涉及课堂上老师要求完成的操作以及<strong>大作业</strong>内容<br>具体内容还得自己耐心阅读三本指南</p>
+<h2 id="Design-Compile-设计工具"><a href="#Design-Compile-设计工具" class="headerlink" title="Design Compile 设计工具"></a>Design Compile 设计工具</h2><h3 id="Task-1-环境配置"><a href="#Task-1-环境配置" class="headerlink" title="Task 1 环境配置"></a>Task 1 环境配置</h3><ul>
+<li><p>下载VMwareTool 15版本以上</p>
+</li>
+<li><p>解压所下载的压缩包，用VM打开虚拟机</p>
+</li>
+<li><p>Unix终端基本指令：桌面右击 “open in terminal”</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//输入$之后的指令</span><br><span class="line">$ cd &lt;file name&gt;			//进入文件夹目录</span><br><span class="line">$ cd ..					//返回上级目录</span><br><span class="line">$ ls						//列出本目录下级目录</span><br><span class="line">$ ls -al					//列出本目录下所有内容</span><br><span class="line">$ gedit &lt;file name&gt;		//文本编辑器打开文件，若&lt;file name&gt;不存在则新建 </span><br></pre></td></tr></table></figure></li>
+<li><p>配置软件环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1		//进入lab1目录</span><br><span class="line">$ gedit common_setup.tcl							//文本编辑器编辑</span><br><span class="line"></span><br><span class="line">//按照技术文档表格编辑相关变量路径</span><br></pre></td></tr></table></figure></li>
+<li><p>检查环境变量是否正确</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1		//进入lab1目录</span><br><span class="line">$ design_vision -topo								//启动软件图形化界面（GUI）</span><br><span class="line"></span><br><span class="line">//GUI顶部工具栏：File -&gt;  setup</span><br><span class="line">//libirary路径为上一步修改的路径则环境变量配置正确</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Task-3-约束文件"><a href="#Task-3-约束文件" class="headerlink" title="Task 3 约束文件"></a>Task 3 约束文件</h3><ul>
+<li><p>新建约束文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab3/scripts</span><br><span class="line">$ gedit MY_DESIGN.con										//新建约束文件</span><br><span class="line"></span><br><span class="line">//自己想办法把约束文件写了</span><br><span class="line">//不过我猜你写不来</span><br><span class="line">//那下面就直接带你抄答案</span><br><span class="line"></span><br><span class="line">$ cd ..					//返回上级lab3目录</span><br><span class="line">$ ls -al				//展开下级全部目录</span><br><span class="line">$ cd .solution			//进入到.solution目录</span><br><span class="line">$ gedit MY_DESIGN.con	//文本编辑器打开已有的约束文件</span><br></pre></td></tr></table></figure></li>
+<li><p>应用约束文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab3</span><br><span class="line">$ design_vision -topo		//进入DC GUI界面</span><br></pre></td></tr></table></figure>
+
+<p>打开设计文件 <code>rtl/MY_DESIGN.v</code><br>link(关联) library<br>检查    <code>-&gt; check_library</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//应用约束文件</span><br><span class="line">//输入 -&gt; 后的命令</span><br><span class="line">-&gt; source scripts/MY_DESIGN.con</span><br><span class="line">-&gt; check_timing</span><br><span class="line">-&gt; report_clock</span><br><span class="line">-&gt; report_clock -skew</span><br><span class="line">-&gt; report_port -verbose</span><br><span class="line"></span><br><span class="line">-&gt; write_script -out scripts/MY_DESIGN.wscr</span><br><span class="line">-&gt; write -format ddc -hier -out unmapped/MY_DESIGN.ddc</span><br><span class="line">-&gt; exit</span><br><span class="line"></span><br><span class="line">//对比两个约束文件</span><br><span class="line">$ diff scripts/MY_DESIGN.wscr .solutions/MY_DESIGN.wscr</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="IC-Compiler-版图工具"><a href="#IC-Compiler-版图工具" class="headerlink" title="IC Compiler 版图工具"></a>IC Compiler 版图工具</h2><h3 id="Task-1-启动"><a href="#Task-1-启动" class="headerlink" title="Task 1 启动"></a>Task 1 启动</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_labs/ICC_2013.12-sp2</span><br><span class="line">$ tar -xvf ces_icc_2013.12-sp2.tar.gz		//解压ICC文件</span><br><span class="line"></span><br><span class="line">$ cd digital_labs/ICC_2013.12-sp2/IC_Compiler_2013.12-SP2/ORCA_TOP/rm_icc/tmp</span><br><span class="line">$ make restore_lab0</span><br><span class="line">$ make load									//启动版图工具</span><br><span class="line"></span><br><span class="line">-&gt; start_gui								//启动图形化界面</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="大作业"><a href="#大作业" class="headerlink" title="大作业"></a>大作业</h2><h3 id="实验一-序列检测电路"><a href="#实验一-序列检测电路" class="headerlink" title="实验一 序列检测电路"></a>实验一 序列检测电路</h3><h4 id="RTL设计"><a href="#RTL设计" class="headerlink" title="RTL设计"></a>RTL设计</h4><p>序列检测电路大多采用状态机实现，网上有大量代码可以复制<br>此处采用移位寄存器实现，较为简易（懒得自己写的可以变更变量名套用）</p>
+<ul>
+<li>设计文件project1.v</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">//序列检测电路——10100</span></span><br><span class="line"><span class="comment">//采用移位寄存器设计,序列匹配则输出1，否则为0</span></span><br><span class="line"><span class="comment">//By SevenTao </span></span><br><span class="line"><span class="comment">//2021.7.1</span></span><br><span class="line"><span class="keyword">module</span> project1 (</span><br><span class="line">    <span class="keyword">input</span>       clk,                                    <span class="comment">//外部时钟</span></span><br><span class="line">    <span class="keyword">input</span>       rst,                                    <span class="comment">//外部复位，高电平有效</span></span><br><span class="line">    <span class="keyword">input</span>       data,                                   <span class="comment">//输入数据位</span></span><br><span class="line">    <span class="keyword">output</span>      res                                     <span class="comment">//输出检测结果</span></span><br><span class="line">);</span><br><span class="line">    <span class="keyword">reg</span>[<span class="number">4</span>:<span class="number">0</span>]    data_r;        <span class="comment">//5位存储输入数据流的寄存器</span></span><br><span class="line">    <span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">if</span>(!rst)    data_r &lt;= &#123;data_r[<span class="number">3</span>:<span class="number">0</span>],data&#125;;       <span class="comment">//进行移位</span></span><br><span class="line">        <span class="keyword">else</span>        data_r &lt;= <span class="number">5&#x27;b00000</span>;                 <span class="comment">//复位清零</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assign</span> res = (data_r == <span class="number">5&#x27;b10100</span>) ? <span class="number">1&#x27;b1</span> : <span class="number">1&#x27;b0</span>;    <span class="comment">//序列检测逻辑</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>仿真文件project1_tb.v</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="comment">//序列检测电路仿真文件</span></span><br><span class="line"><span class="comment">//By SevenTao </span></span><br><span class="line"><span class="comment">//2021.7.1</span></span><br><span class="line"><span class="meta">`<span class="meta-keyword">timescale</span> 1ns/1ns</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> project1_tb;</span><br><span class="line">    <span class="keyword">reg</span>         clk;</span><br><span class="line">    <span class="keyword">reg</span>         rst;</span><br><span class="line">    <span class="keyword">reg</span>         data;</span><br><span class="line">    <span class="keyword">wire</span>        res;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//时钟、复位信号初始化</span></span><br><span class="line">    <span class="comment">//产生检测序列</span></span><br><span class="line">    <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">        clk = <span class="number">0</span>;</span><br><span class="line">        rst = <span class="number">1</span>;</span><br><span class="line">        #<span class="number">5</span> rst=<span class="number">0</span>;</span><br><span class="line">        data = <span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">10</span> data=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">$stop</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//产生时钟信号</span></span><br><span class="line">    <span class="keyword">always</span> #<span class="number">5</span> clk = ~clk;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//例化</span></span><br><span class="line">    project1 project1(</span><br><span class="line">        <span class="variable">.clk</span>(clk),</span><br><span class="line">        <span class="variable">.rst</span>(rst),</span><br><span class="line">        <span class="variable">.data</span>(data),</span><br><span class="line">        <span class="variable">.res</span>(res)</span><br><span class="line">    );</span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="仿真"><a href="#仿真" class="headerlink" title="仿真"></a>仿真</h4><p>Synopsys下VCS进行仿真时出现环境报错<br>用半天时间尝试修改环境变量之后依然出现了其他报错<br>因此推荐下载modelsim进行仿真<br>若非要用VCS，通过<a href="https://pan.baidu.com/s/1-Dus8rN-fBCSwSVNAY4sKQ">此链接</a>下载新虚拟机使用（提取码：m4x4）</p>
+<h4 id="DC综合"><a href="#DC综合" class="headerlink" title="DC综合"></a>DC综合</h4><ul>
+<li>约束文件project1.con（#后为注释内容，注意结合自己的RTL设计文件更换变量）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#By SevenTao</span><br><span class="line">#2021.7.1</span><br><span class="line"></span><br><span class="line">#复位</span><br><span class="line">reset_design</span><br><span class="line"></span><br><span class="line">#时钟频率1Mhz对应1000ns</span><br><span class="line">#clk为RTL文件里的时钟端口变量名</span><br><span class="line">create_clock -period 1000 [get_ports clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的source latency为20ns</span><br><span class="line">set_clock_latency -source 20 [get_clocks clk] </span><br><span class="line"></span><br><span class="line">#时钟信号的network latency为20ns</span><br><span class="line">set_clock_latency 10 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的setup_uncertainty为学号后两位，我是69</span><br><span class="line">set_clock_uncertainty -setup 69 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#时钟信号的transition为5ns</span><br><span class="line">set_clock_transition 5 [get_clocks clk]</span><br><span class="line"></span><br><span class="line">#除clk之外输入信号最大延时为5ns</span><br><span class="line">#RTL设计文件中端口输入变量为data</span><br><span class="line">set_input_delay -max  5 -clock clk [get_ports data]</span><br><span class="line"></span><br><span class="line">#除clk之外输入信号使用bufbd1驱动</span><br><span class="line">set_driving_cell -lib_cell bufbd1 \</span><br><span class="line"> [remove_from_collection [all_inputs] [get_ports &quot;clk&quot;]]</span><br><span class="line"></span><br><span class="line">#输出信号延时为5ns</span><br><span class="line">set_output_delay 0.5 -clock clk [get_ports res]</span><br><span class="line"></span><br><span class="line">#输出信号连接负载电容1fF，即0.001pf</span><br><span class="line">set_load 0.001 [get_ports Cout*]</span><br><span class="line"></span><br><span class="line">#设置版图利用率为0.9</span><br><span class="line">set_utilization 0.9</span><br><span class="line"></span><br><span class="line">#设置版图的宽长比为1</span><br><span class="line">set_aspect_ratio 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>脚本文件dc.tcl</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//需要先在DC中手动读入脚本文件</span><br><span class="line">//然后再shell中运行本脚本文件</span><br><span class="line"></span><br><span class="line">//关联library，检查设计</span><br><span class="line">link</span><br><span class="line">check_design</span><br><span class="line"></span><br><span class="line">//应用约束文件</span><br><span class="line">source project1.con</span><br><span class="line">check_timing</span><br><span class="line"></span><br><span class="line">//report信息写至.rpt文件中</span><br><span class="line">redirect -tee -file rc.rpt &#123;report_constraint -all&#125;</span><br><span class="line">redirect -tee -file rt.rpt &#123;report_timing&#125;</span><br><span class="line">redirect -tee -file ra.rpt &#123;report_area&#125;</span><br><span class="line"></span><br><span class="line">//综合结果写入.ddc文件中</span><br><span class="line">write -f ddc -hier -out project1.ddc</span><br><span class="line"></span><br><span class="line">exit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DC综合</li>
+</ul>
+<p>综合时发现若直接在题目要求的目录（即SoCxxx）启动DC的话，会出现library的报错，即第一节课出现的同款错误，问题在于第一次课的环境配置仅应用于 lab1 下的.tcl，并没有配置到全局，因此推荐讲文件复制到 <strong>lab1 <strong>目录下的rtl与scripts文件夹下，此时在lab1目录下启动DC，具体操作类同于</strong>DC TASK1</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cd digital_lab/DC1_2012.06/DC1_2012.06/lab1</span><br><span class="line">$ design_vision -topo</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我在脚本里没有写读取verilog文件的操作，因此需要先手动读入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-&gt; read_verilog rtl/project1.v</span><br><span class="line">-&gt; source scripts/dc.tcl</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>读入之后可以运行脚本，但是整个脚本直接运行容易出错，依然推荐手动逐行输入命令，检查每条命令是否出错。产生的文件在目录下可以直接看到并用gedit打开。</p>
+<h3 id="实验二-I2C控制器版图设计"><a href="#实验二-I2C控制器版图设计" class="headerlink" title="实验二 I2C控制器版图设计"></a>实验二 I2C控制器版图设计</h3><p>需要现在虚拟机中设置共享文件夹<br>Unix下共享文件夹在mnt/hgfs下（双击computer进入filesystem）<br>右击解压压缩包（Extract here）<br>复制其中的rtl源码到自己的rtl文件夹下</p>
+<ul>
+<li>约束文件 i2c.con</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#By SevenTao</span><br><span class="line">#2021.7.1</span><br><span class="line"></span><br><span class="line">#复位</span><br><span class="line">reset_design</span><br><span class="line"></span><br><span class="line">#wb_clk_i = 32MHz</span><br><span class="line">create_clock -period 31 [get_ports wb_clk_i]</span><br><span class="line"></span><br><span class="line">#别的我实在找不到啥约束好写的了</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>脚本文件 i2c.tcl</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">link</span><br><span class="line">check_design</span><br><span class="line"></span><br><span class="line">source scripts/i2c.con</span><br><span class="line">check_timing</span><br><span class="line"></span><br><span class="line">write -f ddc -hier -out project1.ddc</span><br><span class="line"></span><br><span class="line">exit</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DC综合</li>
+</ul>
+<p>同样推荐先将文件复制到lab1进行操作，操作和实验1相同</p>
+<ul>
+<li>icc.tcl</li>
+</ul>
+<p><code>~/digital_work/soc2020/scripts/icc.tcl</code><br>自己写一时半会是肯定写不出来的，就直接改改用吧</p>
+<ul>
+<li>版图</li>
+</ul>
+<p>floorplan,place,cts,route,finish都对应Guide的不同Task<br>但是如何用综合出来的ddc文件设计出版图我也不会，放弃了，裂开</p>
+]]></content>
+      <categories>
+        <category>NPUclasses</category>
+      </categories>
+      <tags>
+        <tag>synopsys</tag>
+        <tag>SoC</tag>
+        <tag>Verilog</tag>
       </tags>
   </entry>
   <entry>
